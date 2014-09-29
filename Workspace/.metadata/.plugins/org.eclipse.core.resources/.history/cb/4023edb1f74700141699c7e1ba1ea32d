@@ -5,12 +5,10 @@ import dxl_communication.Communication;
 public class Test {
 	
 	
-	public static void main(String args[]){
+	public static void Main(String args[]){
 		
 		
 		Actuator a = new Actuator(2);
-		
-		System.out.println("Heisann, kjører ");
 		
 		Communication.writeWordToDxl(2, 32, 250);
 		

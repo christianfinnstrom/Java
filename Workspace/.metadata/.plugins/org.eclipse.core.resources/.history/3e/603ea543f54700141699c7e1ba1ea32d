@@ -77,7 +77,14 @@ public class Actuator {
 		return Communication.readWordFromDxl(this.ID, address);
 	}
 	
-
+	
+	
+	public void rotateByDegrees(){
+		// logikk som beregner hvor langt 
+		int address = 37;  // rotate to
+		int rotate = 50*55;
+		write(address, rotate);
+	}
 	
 	
 	/**
