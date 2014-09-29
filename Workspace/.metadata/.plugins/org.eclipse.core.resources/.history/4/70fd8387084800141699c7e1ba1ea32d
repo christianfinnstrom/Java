@@ -1,0 +1,12 @@
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class ControlTable {
+	
+	Map<String, Integer> dictionary = new HashMap<String, Integer>();
+	
+
+	
+
+}

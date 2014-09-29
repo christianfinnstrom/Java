@@ -1,0 +1,12 @@
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class ControlTable {
+	
+	Map<String, String> controlTableD = new HashMap<String, String>();
+	
+	controlTableD.put("Model Number(L)", "one");
+	
+
+}

@@ -1,0 +1,57 @@
+import java.util.HashMap;
+import java.util.Map;
+
+
+public static class ControlTable {
+	
+	static{
+		Map<String, Integer> dictionary = new HashMap<String, Integer>();
+		dictionary.put("model number(l)", 0);
+		dictionary.put("model number(h)", 1);
+		dictionary.put("version of firmware", 2);
+		dictionary.put("id", 3);
+		dictionary.put("model number(l)", 4);
+		dictionary.put("model number(l)", 5);
+		dictionary.put("model number(l)", 6);
+		dictionary.put("cw angle limit(l)", 7);
+		dictionary.put("cw angle limit(h)", 8);
+		dictionary.put("ccw angle limit(l)", 9);
+		dictionary.put("ccw angle limit(h)", 11);
+		dictionary.put("the highest limit temperature", 12);
+		dictionary.put("the lowest limit voltage", 13);
+		dictionary.put("the highest limit voltage", 14);
+		dictionary.put("max torque(l)", 15);
+		dictionary.put("max torque(h)", 16);
+		dictionary.put("status return level", 17);
+		dictionary.put("alarm led", 18);
+		dictionary.put("alarm shutdown", 24);
+		dictionary.put("torque enable", 25);
+		dictionary.put("led", 26);
+		dictionary.put("cw compliance margin", 27);
+		dictionary.put("ccw compliance margin", 28);
+		dictionary.put("cw compliance slope", 29);
+		dictionary.put("ccw compliance slope", 30);
+		dictionary.put("goal position(l)", 31);
+		dictionary.put("goal position(h)", 32);
+		dictionary.put("moving speed(l)", 33);
+		dictionary.put("moving speed(h)", 34);
+		dictionary.put("torque limit(l)", 35);
+		dictionary.put("torque limit(h)", 36);
+		dictionary.put("present position(l)", 37);
+		dictionary.put("present position(h)", 38);
+		dictionary.put("present speed(l)", 39);
+		dictionary.put("present speed(h)", 40);
+		dictionary.put("present load(l)", 41);
+		dictionary.put("present load(h)", 42);
+		dictionary.put("present voltage", 43);
+		dictionary.put("present temperature", 44);
+		dictionary.put("registered", 45);
+		dictionary.put("moving)", 46);
+		dictionary.put("lock", 47);
+		dictionary.put("punch(l)", 48);
+		dictionary.put("punch(h)", 49);
+	}
+
+
+
+}

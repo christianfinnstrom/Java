@@ -1,0 +1,10 @@
+import java.util.HashMap;
+
+
+public class ControlTable {
+	
+	Map<String, Integer> controlTable = new HashMap<String, Integer>();
+	
+	
+
+}

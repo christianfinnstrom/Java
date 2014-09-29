@@ -1,0 +1,6 @@
+
+public class ControlTable {
+	
+	Map<String, int> controlTable
+
+}

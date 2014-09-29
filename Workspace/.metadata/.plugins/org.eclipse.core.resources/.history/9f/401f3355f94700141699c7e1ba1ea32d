@@ -1,0 +1,24 @@
+package dxl_control;
+
+import dxl_communication.Communication;
+
+public class Test {
+	
+	
+	public static void main(String args[]){
+		
+		
+		Actuator a = new Actuator(2);
+		
+		System.out.println("Heisann, kjører ");
+		
+		Communication.writeWordToDxl(2, 32, 250);
+		
+		System.out.println(Communication.readWordFromDxl(2, 37));
+		
+	}
+
+	
+	
+
+}

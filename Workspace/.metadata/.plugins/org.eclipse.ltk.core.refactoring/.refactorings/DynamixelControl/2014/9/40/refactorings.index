@@ -7,3 +7,5 @@
 1412001593370	Rename type 'CommunicationMethods'
 1412005316929	Rename type 'TxPacket'
 1412009213999	Delete element
+1412010824499	Delete elements
+1412017442937	Rename type 'ControlTable'

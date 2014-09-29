@@ -1,5 +1,9 @@
 package dxl_control;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import java_native_access.IDynamixelControl;
 import dxl_communication.Communication;
 
 public class Test {
@@ -10,9 +14,10 @@ public class Test {
 		
 		Actuator a = new Actuator(2);
 		
-		System.out.println("Heisann, kjører ");
+		Communication.initialize();
 		
-		Communication.writeWordToDxl(2, 32, 250);
+		System.out.println(Communication.getModelNumber(2));
+		
 		
 	}
 

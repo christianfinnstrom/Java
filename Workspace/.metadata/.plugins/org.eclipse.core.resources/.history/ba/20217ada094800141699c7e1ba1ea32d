@@ -1,0 +1,57 @@
+import java.util.HashMap;
+import java.util.Map;
+
+
+public static class ControlTable {
+	
+	static{
+		Map<String, Integer> dictionary = new HashMap<String, Integer>();
+		dictionary.put("model number(l)", 0);
+		dictionary.put("model number(l)", 1);
+		dictionary.put("model number(l)", 2);
+		dictionary.put("model number(l)", 3);
+		dictionary.put("model number(l)", 4);
+		dictionary.put("model number(l)", 5);
+		dictionary.put("model number(l)", 6);
+		dictionary.put("model number(l)", 7);
+		dictionary.put("model number(l)", 8);
+		dictionary.put("model number(l)", 9);
+		dictionary.put("model number(l)", 11);
+		dictionary.put("model number(l)", 12);
+		dictionary.put("model number(l)", 13);
+		dictionary.put("model number(l)", 14);
+		dictionary.put("model number(l)", 15);
+		dictionary.put("model number(l)", 16);
+		dictionary.put("model number(l)", 17);
+		dictionary.put("model number(l)", 18);
+		dictionary.put("model number(l)", 24);
+		dictionary.put("model number(l)", 25);
+		dictionary.put("model number(l)", 26);
+		dictionary.put("model number(l)", 27);
+		dictionary.put("model number(l)", 28);
+		dictionary.put("model number(l)", 29);
+		dictionary.put("model number(l)", 30);
+		dictionary.put("model number(l)", 31);
+		dictionary.put("model number(l)", 32);
+		dictionary.put("model number(l)", 33);
+		dictionary.put("model number(l)", 34);
+		dictionary.put("model number(l)", 35);
+		dictionary.put("model number(l)", 36);
+		dictionary.put("model number(l)", 37);
+		dictionary.put("model number(l)", 38);
+		dictionary.put("model number(l)", 39);
+		dictionary.put("model number(l)", 40);
+		dictionary.put("model number(l)", 41);
+		dictionary.put("model number(l)", 42);
+		dictionary.put("model number(l)", 43);
+		dictionary.put("", 44);
+		dictionary.put("registered", 45);
+		dictionary.put("moving)", 46);
+		dictionary.put("lock", 47);
+		dictionary.put("punch(l)", 48);
+		dictionary.put("punch(h)", 49);
+	}
+
+
+
+}

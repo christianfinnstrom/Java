@@ -1,0 +1,6 @@
+
+public class ControlTable {
+	
+	Map<String, Integer> controlTable = new HashMap<String, Integer>();
+
+}

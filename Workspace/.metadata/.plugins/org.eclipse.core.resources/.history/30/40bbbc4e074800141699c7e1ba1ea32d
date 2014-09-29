@@ -1,0 +1,11 @@
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class ControlTable {
+	
+	Map<String, Integer> controlTable = new HashMap<String, Integer>();
+	
+	dictionary.put("Model Number(L)")
+
+}

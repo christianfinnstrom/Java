@@ -1,0 +1,56 @@
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class ControlTable {
+	
+	static{
+		Map<String, Integer> dictionary = new HashMap<String, Integer>();
+		dictionary.put("model number(l)", 0);
+		dictionary.put("model number(h)", 1);
+		dictionary.put("version of firmware", 2);
+		dictionary.put("id", 3);
+		dictionary.put("baud rate", 4);
+		dictionary.put("return delay time", 5);
+		dictionary.put("cw angle limit(l)", 6);
+		dictionary.put("cw angle limit(h)", 7);
+		dictionary.put("ccw angle limit(l)", 8);
+		dictionary.put("ccw angle limit(h)", 9);
+		dictionary.put("the highest limit temperature", 11);
+		dictionary.put("the lowest limit voltage", 12);
+		dictionary.put("the highest limit voltage", 13);
+		dictionary.put("max torque(l)", 14);
+		dictionary.put("max torque(h)", 15);
+		dictionary.put("status return level", 16);
+		dictionary.put("alarm led", 17);
+		dictionary.put("alarm shutdown", 18);
+		dictionary.put("torque enable", 24);
+		dictionary.put("led", 25);
+		dictionary.put("cw compliance margin", 26);
+		dictionary.put("ccw compliance margin", 27);
+		dictionary.put("cw compliance slope", 28);
+		dictionary.put("ccw compliance slope", 29);
+		dictionary.put("goal position(l)", 30);
+		dictionary.put("goal position(h)", 31);
+		dictionary.put("moving speed(l)", 32);
+		dictionary.put("moving speed(h)", 33);
+		dictionary.put("torque limit(l)", 34);
+		dictionary.put("torque limit(h)", 35);
+		dictionary.put("present position(l)", 36);
+		dictionary.put("present position(h)", 37);
+		dictionary.put("present speed(l)", 38);
+		dictionary.put("present speed(h)", 39);
+		dictionary.put("present load(l)", 40);
+		dictionary.put("present load(h)", 41);
+		dictionary.put("present voltage", 42);
+		dictionary.put("present temperature", 43);
+		dictionary.put("registered", 44);
+		dictionary.put("moving)", 46);
+		dictionary.put("lock", 47);
+		dictionary.put("punch(l)", 48);
+		dictionary.put("punch(h)", 49);
+	}
+
+
+
+}

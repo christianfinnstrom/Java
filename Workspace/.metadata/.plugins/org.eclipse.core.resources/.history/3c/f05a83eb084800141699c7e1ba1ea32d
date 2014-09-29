@@ -1,0 +1,16 @@
+import java.util.HashMap;
+import java.util.Map;
+
+
+public static class ControlTable {
+	
+	static{
+		Map<String, Integer> dictionary = new HashMap<String, Integer>();
+	}
+
+	static{
+		dictionary.put
+		
+	}
+
+}
