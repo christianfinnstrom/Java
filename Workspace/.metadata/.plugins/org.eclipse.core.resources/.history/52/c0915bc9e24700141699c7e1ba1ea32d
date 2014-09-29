@@ -1,0 +1,34 @@
+package control;
+
+import java_native_access.IDynamixelControl;
+
+
+public class Actuator {
+	
+	
+	int DEFAULT_PORTNUM = 3; // COM3
+	int DEFAULT_BAUDNUM = 1; // 1mbps
+
+	
+	public int ID; // the Actuator ID
+	
+	
+	/*
+	 * Create an instance of a Dynamixel actuator
+	 * @param ID The ID of this actuator
+	 */
+	public Actuator(int ID){
+		this.ID = ID;
+	}
+	
+	
+	public int initialize()	{
+		IDynamixelControl.INSTANCE.dxl_initialize(DEFAULT_PORTNUM, DEFAULT_BAUDNUM)
+	}
+	
+	
+	
+	
+
+
+}

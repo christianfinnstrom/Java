@@ -1,0 +1,21 @@
+package control;
+
+import java_native_access.IDynamixelControl;
+
+
+/**
+ * @author Sigbjørn
+ *
+ */
+public class Actuator {
+	
+
+	
+	public int ID; // the Actuator ID
+	
+	public Actuator(ID)
+	
+	
+
+
+}

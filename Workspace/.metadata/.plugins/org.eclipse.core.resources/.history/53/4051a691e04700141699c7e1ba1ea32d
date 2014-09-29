@@ -1,0 +1,16 @@
+package control;
+
+import java_native_access.IDynamixelControl;
+import 
+
+
+public class Test implements I {
+	
+	public static void main(String args[]){
+		
+		IDynamixelControl aa = IDynamixelControl.INSTANCE;
+		
+		
+	}
+
+}

@@ -1,0 +1,29 @@
+package control;
+
+import java_native_access.IDynamixelControl;
+
+
+public class Test {
+	
+	
+	public int actuatorID;
+	
+	
+	public static void main(String args[]){
+		
+		IDynamixelControl.INSTANCE.dxl_ping(this.ID);
+		
+		public void initialize(){
+			
+			
+			aa.Initialize(thisId, )
+			
+			
+		}
+		
+		
+		
+		
+	}
+
+}

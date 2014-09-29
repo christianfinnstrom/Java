@@ -1,0 +1,56 @@
+package control;
+
+import java_native_access.IDynamixelControl;
+
+
+public class Actuator {
+	
+	
+	/*
+	 * 
+	 * Mangler: settere og gettere
+	 * 
+	 * 
+	 */
+	private Integer DEFAULT_PORTNUM, DEFAULT_BAUDNUM;	
+	
+	private int ID; // the Actuator ID
+	
+	public void setID(int id){
+		this.ID = id;
+	}
+	
+	public int getID(){
+		return this.ID;
+	}
+	
+	
+	/*
+	 * Create an instance of a Dynamixel actuator
+	 * @param ID The ID of this actuator
+	 */
+	public Actuator(int ID){
+		this.ID = ID;
+		DEFAULT_PORTNUM = 3; // COM3
+		DEFAULT_BAUDNUM = 1; // 1mbps
+	}
+	
+	
+	public int initialize()	{
+		return IDynamixelControl.INSTANCE.dxl_initialize(DEFAULT_PORTNUM, DEFAULT_BAUDNUM);
+	}
+	
+	public void terminate() {
+		IDynamixelControl.INSTANCE.dxl_terminate();
+	}
+	
+	public void tx_packet(){
+		
+	}
+	
+	
+	
+	
+
+
+}

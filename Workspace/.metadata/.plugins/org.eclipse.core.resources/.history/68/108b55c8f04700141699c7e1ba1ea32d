@@ -1,0 +1,70 @@
+package dxl_communication;
+
+import java_native_access.IDynamixelControl;
+
+
+/*
+ * 
+ * The methods in this class are used for communication between the computer and the Dynamixel actuator(s).
+ * The methods are called from the 
+ * 
+ * 
+ * 
+ * 
+ */
+public class Communication {
+	
+	private int DEFAULT_PORTNUM = 3; //com3
+	private int DEFAULT_BAUDNUM = 1; //mbps	
+	
+	public int initialize()	{
+		return IDynamixelControl.INSTANCE.dxl_initialize(DEFAULT_PORTNUM, DEFAULT_BAUDNUM);
+	}
+	
+	public void terminate() {
+		IDynamixelControl.INSTANCE.dxl_terminate();
+	}
+	
+	public void tx_packet() {
+		IDynamixelControl.INSTANCE.dxl_tx_packet();
+	}
+	
+	public void rx_packet() {
+		IDynamixelControl.INSTANCE.dxl_tx_packet();
+	}
+	
+	/**
+	 * This should automatically choose between byte and word
+	 * 
+	 * @return
+	 */
+	private int read(){
+	
+	}
+	
+	/**
+	 * This should automatically choose between byte and word
+	 */
+	private void write(){
+		
+	}
+	
+	private void writeByte(int id, int address, int value){
+		
+	}
+	
+	private void writeWord(){
+		
+	}
+	
+	private int readByte(){
+		
+	}
+	
+	private int readWord(){
+		
+	}
+	
+	
+
+}

@@ -1,0 +1,24 @@
+package dxl_communication;
+
+import dxl_control.integer;
+import java_native_access.IDynamixelControl;
+
+public class CommunicationMethods {
+	
+	private integer DEFAULT_PORTNUM, DEFAULT_BAUDNUM;	
+	
+	public int initialize()	{
+		return IDynamixelControl.INSTANCE.dxl_initialize(DEFAULT_PORTNUM, DEFAULT_BAUDNUM);
+	}
+	
+	public void terminate() {
+		IDynamixelControl.INSTANCE.dxl_terminate();
+	}
+	
+	public void tx_packet(){
+		
+	}
+	
+	
+
+}

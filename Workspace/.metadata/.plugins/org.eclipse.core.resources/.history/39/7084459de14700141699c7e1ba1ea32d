@@ -1,0 +1,24 @@
+package control;
+
+import java_native_access.IDynamixelControl;
+
+
+public class Actuator {
+	
+
+	
+	public int ID; // the Actuator ID
+	
+	
+	/*
+	 * Create an instance of a Dynamixel actuator
+	 * @param ID The ID of this actuator
+	 */
+	public Actuator(int ID){
+		this.ID = ID;
+	}
+	
+	
+
+
+}

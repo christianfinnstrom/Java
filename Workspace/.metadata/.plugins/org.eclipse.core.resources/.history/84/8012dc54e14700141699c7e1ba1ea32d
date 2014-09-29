@@ -1,0 +1,19 @@
+package control;
+
+import java_native_access.IDynamixelControl;
+
+
+public class Actuator {
+	
+	
+	
+	
+
+	
+		
+		
+		
+		
+	}
+
+}
