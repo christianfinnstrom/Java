@@ -187,7 +187,7 @@ public class Communication {
 		IDynamixelControl.INSTANCE.dxl_write_byte(id, address, value);
 	}
 	
-	private static void writeWordToDxl(int id, int address, int value){
+	public static void writeWordToDxl(int id, int address, int value){
 		IDynamixelControl.INSTANCE.dxl_write_word(id, address, value);
 	}
 	

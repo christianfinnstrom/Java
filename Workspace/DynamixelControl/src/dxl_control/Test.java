@@ -15,8 +15,9 @@ public class Test {
 		Actuator a = new Actuator(2);
 		
 		Communication.initialize();
-		
+		System.out.println("hello");
 		System.out.println(Communication.getModelNumber(2));
+//		System.out.println(Communication.getBaudrate(a.getID()));
 		
 		
 	}
