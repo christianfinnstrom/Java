@@ -1,7 +1,0 @@
-package control;
-
-public class Test {
-	
-	DynamixelControl dnc = new DynamixelControl;
-
-}

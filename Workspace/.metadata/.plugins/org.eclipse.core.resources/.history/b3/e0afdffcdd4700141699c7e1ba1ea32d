@@ -1,9 +1,0 @@
-package control;
-
-import java_native_access.DynamixelControl;
-
-public class Test {
-	
-	IDynamixelControl idc2  = DynamixelControl.getDyanmixelControl();
-
-}

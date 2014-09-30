@@ -1,7 +1,0 @@
-package control;
-
-public class Test {
-	
-	Actuator test = new Actuator(2);
-
-}

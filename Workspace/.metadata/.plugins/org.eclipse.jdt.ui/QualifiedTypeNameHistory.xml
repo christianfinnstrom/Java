@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java_native_access.DynamixelControl"/>
+<fullyQualifiedTypeName name="java_native_access.DynamixelControl.IDynamixelControl"/>
+<fullyQualifiedTypeName name="java_native_access.IDynamixelControl"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="dxl_communication.Communication"/>
+</qualifiedTypeNameHistroy>

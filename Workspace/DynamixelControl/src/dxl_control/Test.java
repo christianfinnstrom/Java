@@ -15,8 +15,15 @@ public class Test {
 		Actuator a = new Actuator(2);
 		
 		Communication.initialize();
+
 		
-		System.out.println(Communication.getModelNumber(2));
+		System.out.println("ID on 2: " + Communication.readFromDxl(2, 3)); 
+		System.out.println("Baud rate on 4: " + Communication.readFromDxl(2, 4));
+		System.out.println("Baud rate on 4: " + Communication.readFromDxl(4, 4));
+		
+		System.out.println("ID on 4: " + Communication.readFromDxl(4, 3)); 
+		
+		Communication.terminate();
 		
 		
 	}
