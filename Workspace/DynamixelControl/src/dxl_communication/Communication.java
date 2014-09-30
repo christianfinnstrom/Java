@@ -116,6 +116,26 @@ public class Communication {
 		return readFromDxl(id, dictionary.get("baud rate"));
 	}
 	
+	public static void setBaudrate(int id, int newBaud){
+		writeToDxl(id, dictionary.get("baud rate"), newBaud);
+	}
+	
+	public static int getReturnDelayTime(int id){
+		return readFromDxl(id, dictionary.get("return delay time"));
+	}
+	
+	public static void setReturnDelayTime(int id, int newReturnDelayTime){
+		writeToDxl(id, dictionary.get("return delay time"), newReturnDelayTime);
+	}
+	
+	public static int getCWAngleLimit(int id){
+		return readFromDxl(id, dictionary.get("cw angle limit(l)"));
+	}
+	
+	public static void setCWAngleLimit(int id, int newCWAngleLimit){
+		writeToDxl(id, dictionary.get("cw angle limit(l)"), newCWAngleLimit);
+	}
+	
 	
 	/**
 	 * 

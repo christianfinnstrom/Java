@@ -24,6 +24,7 @@ public class Test {
 		System.out.println("ID on 4: " + Communication.readFromDxl(4, 3)); 
 		
 		Communication.terminate();
+
 		
 		
 	}

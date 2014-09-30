@@ -12,11 +12,9 @@ import com.sun.jna.Library;
 import com.sun.jna.Native;
 import com.sun.jna.Platform;
 
-public class DynamixelControl {
 	
-
-
 public interface IDynamixelControl extends Library{
+	
 	
 	public IDynamixelControl INSTANCE = (IDynamixelControl) Native.loadLibrary(
 			(Platform.isWindows() ? "DynamixelControl" : "DynamixelControl"), IDynamixelControl.class);
@@ -29,7 +27,7 @@ public interface IDynamixelControl extends Library{
 	
 	/**
 	 * Attempts to initialize the communication devices
-	 * @param devIndex Number of connected communication devices
+	 * @param devIndex Number of connected communication devices or default PORTNUM
 	 * @param baudnum 
 	 * @return 1 if success, 0 if failure
 	 */
@@ -195,6 +193,12 @@ public interface IDynamixelControl extends Library{
      */
     public int dxl_get_highbyte(int word);
 
-}
 
+	
+	    
 }
+	
+	
+
+
+
