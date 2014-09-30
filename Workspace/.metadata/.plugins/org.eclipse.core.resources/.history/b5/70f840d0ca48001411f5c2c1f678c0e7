@@ -1,0 +1,44 @@
+package utility;
+import java.util.HashMap;
+import java.util.Map;
+import com.sun.jna.Platform;
+
+
+public class UtilityClass {
+	
+//	public static String dllName;
+//	public static String osName = System.getProperty("os.name");
+//	public static int bitness = Integer.parseInt(System.getProperty("sun.arch.data.model"));
+	
+
+	public static String getDLLFileName(){
+		String os = getOS();
+		int bitness = getBitness();
+		
+		if (Platform.isWindows()){
+			if (Platform.is64Bit()) return "DynamixelControl64";
+			else return "DynamixelControl32";
+		}
+		else if(os.equals("linux")){
+			if (Platform.is64Bit()) return "DynamixelControl64";
+			else return "DynamixelControl32";
+		}
+		else return null;
+	}
+
+	public static String getOS(){
+		String fullOS = System.getProperty("os.name");
+		
+		if(fullOS.toLowerCase().contains("windows")) return "windows";
+		if(fullOS.toLowerCase().contains("linux")) return "linux"; // eller bare sjekke om den inneholder "u"?
+		else return null;	
+	}
+	
+	
+	public static int getBitness(){
+		return Integer.parseInt(System.getProperty("sun.arch.data.model"));
+	}
+	
+
+
+}

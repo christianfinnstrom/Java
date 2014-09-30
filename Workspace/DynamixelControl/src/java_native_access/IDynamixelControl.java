@@ -8,6 +8,7 @@ package java_native_access;
  * 
  */
 
+import utility.UtilityClass;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 import com.sun.jna.Platform;
@@ -16,10 +17,19 @@ import com.sun.jna.Platform;
 public interface IDynamixelControl extends Library{
 	
 	
+//
+//	public IDynamixelControl INSTANCE = (IDynamixelControl) Native.loadLibrary(
+//			(Platform.isWindows() ? "DynamixelControl64" : "DynamixelControl"), IDynamixelControl.class);
+	
 	public IDynamixelControl INSTANCE = (IDynamixelControl) Native.loadLibrary(
-			(Platform.isWindows() ? "DynamixelControl64" : "DynamixelControl"), IDynamixelControl.class);
+			(UtilityClass.getDLLFileName()), IDynamixelControl.class);
+
+
+	
+
 	
 	
+//	
 /*
 *	DEVICE CONTROL METHODS - subroutines to control the 
 *	communication devices.

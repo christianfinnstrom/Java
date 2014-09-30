@@ -9,4 +9,5 @@
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="dxl_communication.Communication"/>
+<fullyQualifiedTypeName name="utility.UtilityClass"/>
 </qualifiedTypeNameHistroy>

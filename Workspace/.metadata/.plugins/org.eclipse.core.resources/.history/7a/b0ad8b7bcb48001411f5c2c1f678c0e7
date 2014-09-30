@@ -1,0 +1,41 @@
+package utility;
+import com.sun.jna.Platform;
+
+
+public class UtilityClass {
+
+	/**
+	 * Creates a String with the DLL filename based on OS and bitness
+	 * @return DLL filename
+	 */
+	public static String getDLLFileName(){
+		if (Platform.isWindows()){
+			if (Platform.is64Bit()) return "DynamixelControl64";
+			else return "DynamixelControl32";
+		}
+		else if(Platform.isLinux()){
+			if (Platform.is64Bit()) return "DynamixelControl64";
+			else return "DynamixelControl32";
+		}
+		else return null;
+	}
+
+	/**
+	 * 
+	 * @return OS name
+	 */
+	public static String getOS(){
+		return System.getProperty("os.name");
+	}
+	
+	/**
+	 * 
+	 * @return 
+	 */
+	public static int getBitness(){
+		return Integer.parseInt(System.getProperty("sun.arch.data.model"));
+	}
+	
+
+
+}
