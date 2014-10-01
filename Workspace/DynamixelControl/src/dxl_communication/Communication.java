@@ -96,6 +96,13 @@ public class Communication {
 		dictionary.put("punch(h)", 49);
 	}
 
+	
+	
+	/**********************************************************************************************************************************************************/
+	
+	//TODO legge til beskrivelser fra control table på alle metodene. Legge inn logikk som sjekker for gyldig inn-data?
+	
+	
 	public static int getModelNumber(int id){
 		return readFromDxl(id, dictionary.get("model number(l)"));
 	}
@@ -136,6 +143,286 @@ public class Communication {
 		writeToDxl(id, dictionary.get("cw angle limit(l)"), newCWAngleLimit);
 	}
 	
+	public static int getCCWAngleLimit(int id){
+		return readFromDxl(id, dictionary.get("ccw angle limit(l)"));
+	}
+	
+	public static void setCCWAngleLimit(int id, int newCCWAngleLimit){
+		writeToDxl(id, dictionary.get("ccw angle limit(l)"), newCCWAngleLimit);
+	}
+	
+	public static int getTheHighestLimitTemperature(int id){
+		return readFromDxl(id, dictionary.get("the highest limit temperature"));
+	}
+	
+	public static void setTheHighestLimitTemperature(int id, int value){
+		writeToDxl(id, dictionary.get("the highest limit temperature"), value);
+	}
+
+	public static int getTheLowestLimitVoltage(int id){
+		return readFromDxl(id, dictionary.get("the lowest limit voltage"));
+	}
+	
+	public static void setTheLowestLimitVoltage(int id, int value){
+		writeToDxl(id, dictionary.get("the lowest limit voltage"), value); 
+	}
+	
+	public static int getTheHighestLimitVoltage(int id){
+		return readFromDxl(id, dictionary.get("the highest limit voltage"));
+	}
+	
+	public static void setTheHighestLimitVoltage(int id, int value){
+		writeToDxl(id, dictionary.get("the highest limit voltage"), value);
+	}
+	
+	public static int getMaxTorque(int id){
+		return readFromDxl(id, dictionary.get("max torque(l)"));
+	}
+	
+	public static void setMaxTorque(int id, int value){
+		writeToDxl(id, dictionary.get("max torque(l)"), value);
+	}
+	
+	public static int getStatusReturnLevel(int id){
+		return readFromDxl(id, dictionary.get("status return level"));
+	}
+	
+	public static void setStatusReturnLevel(int id, int value){
+		writeToDxl(id, dictionary.get("status return level"), value);
+	}
+	
+	public static int getAlarmLED(int id){
+		return readFromDxl(id, dictionary.get("alarm led"));
+	}
+	
+	public static void setAlarmLED(int id, int value){
+		writeToDxl(id, dictionary.get("alarm led"), value);
+	}
+	
+	public static int getAlarmShutdown(int id){
+		return readFromDxl(id, dictionary.get("alarm shutdown"));
+	}
+	
+	public static void setAlarmShutdown(int id, int value){
+		writeToDxl(id, dictionary.get("alarm shutdown"), value);
+	}
+	
+	public static int getTorqueEnable(int id){
+		return readFromDxl(id, dictionary.get("torque enable"));
+	}
+	
+	public static void setTorqueEnable(int id, int value){
+		writeToDxl(id, dictionary.get("torque enable"), value);
+	}
+	
+	public static int getLED(int id){
+		return readFromDxl(id, dictionary.get("led"));
+	}
+	
+	public static void setLED(int id, int value){
+		writeToDxl(id, dictionary.get("led"), value);
+	}
+	
+	public static int getCWComplianceMargin(int id){
+		return readFromDxl(id, dictionary.get("cw compliance margin"));
+	}
+
+	public static void setCWComplianceMargin(int id, int value){
+		writeToDxl(id, dictionary.get("cw compliance margin"), value);
+	}
+	
+	public static int getCCWComplianceMargin(int id){
+		return readFromDxl(id, dictionary.get("ccw compliance margin"));
+	}
+
+	public static void setCCWComplianceMargin(int id, int value){
+		writeToDxl(id, dictionary.get("ccw compliance margin"), value);
+	}
+	
+	public static int getCWComplianceSlope(int id){
+		return readFromDxl(id, dictionary.get("cw compliance slope"));
+	}
+
+	public static void setCWComplianceSlope(int id, int value){
+		writeToDxl(id, dictionary.get("cw compliance slope"), value);
+	}
+	
+	public static int getCCWComplianceSlope(int id){
+		return readFromDxl(id, dictionary.get("ccw compliance slope"));
+	}
+
+	public static void setCCWComplianceSlope(int id, int value){
+		writeToDxl(id, dictionary.get("ccw compliance slope"), value);
+	}
+	
+	public static int getGoalPosition(int id){
+		return readFromDxl(id, dictionary.get("goal position(l)"));
+	}
+	
+	public static void setGoalPosition(int id, int value){
+		writeToDxl(id, dictionary.get("goal position(l)"), value);
+	}
+	
+	public static int getMovingSpeed(int id){
+		return readFromDxl(id, dictionary.get("moving speed(l)"));
+	}
+	
+	public static void setMovingSpeed(int id, int value){
+		writeToDxl(id, dictionary.get("moving speed(l)"), value);
+	}
+	
+	public static int getTorqueLimit(int id){
+		return readFromDxl(id, dictionary.get("torque limit(l)"));
+	}
+	
+	public static void setTorqueLimit(int id, int value){
+		writeToDxl(id, dictionary.get("torque limit(l)"), value);
+	}
+	
+	public static int getPresentPosition(int id){
+		return readFromDxl(id, dictionary.get("present position(l)"));
+	}
+	
+	public static int getPresentSpeed(int id){
+		return readFromDxl(id, dictionary.get("present speed(l)"));
+	}
+	
+	public static int getPresentLoad(int id){
+		return readFromDxl(id, dictionary.get("present load(l)"));
+	}
+	
+	public static int getPresentVoltage(int id){
+		return readFromDxl(id, dictionary.get("present voltage"));
+	}
+	
+	public static int getPresentTemperature(int id){
+		return readFromDxl(id, dictionary.get("present temperature"));
+	}
+	
+	/**
+	 * Is instruction registered?
+	 * @param id Dynamixel ID
+	 * @return 0 or 1
+	 */
+	public static int getRegistered(int id){
+		return readFromDxl(id, dictionary.get("registered"));
+	}
+	
+	
+	public static int getMoving(int id){
+		return readFromDxl(id, dictionary.get("moving"));
+	}
+	
+	/**
+	 * Is EEPROM locked for modification?
+	 * @param id
+	 * @return 0 if open, 1 if locked
+	 */
+	public static int getLock(int id){
+		return readFromDxl(id, dictionary.get("lock"));
+	}
+	
+
+	public static void setLock(int id, int value){
+		if(value != 0) value = 1; // make sure that the value will be either 0 or 1 
+		writeToDxl(id, dictionary.get("lock"), value);
+	}
+	
+	public static int getPunch(int id){
+		return readFromDxl(id, dictionary.get("punch(l)"));
+	}
+	
+	public static void setPunch(int id, int value){
+		writeToDxl(id, dictionary.get("punch(l)"), value);
+	}
+	
+	
+	
+	
+	
+	
+	
+/*********************************************************************************************************************************************************/
+
+	
+	
+	
+	
+	
+	
+	
+	
+	// ekstrametoder underveis:
+	
+	/**
+	 * Enables or disables torque, based on current status
+	 * @param id Dynamixel ID
+	 */
+	public void torqueEnableSwitch(int id){
+		int status = getTorqueEnable(id);
+		if(status > 0) setTorqueEnable(id, 0); // if on, turn off
+		else setTorqueEnable(id, 1); // if off, turn on
+	}
+	
+	/**
+	 * LED on/off switch
+	 * @param id Dynamixel ID
+	 */
+	public void ledSwitch(int id){
+		int status = getLED(id);
+		if(status > 0) setLED(id, 0); // if on, turn off
+		else setLED(id, 1);
+	}
+	
+	/**
+	 * Is there an instruction registered on the Dynamixel?
+	 * @param id Dynamixel ID
+	 * @return true/false
+	 */
+	public static boolean isInstructionRegistered(int id){
+		return (getRegistered(id) > 0 ?  true : false);
+	}
+	
+	
+	/**
+	 * Is Goal position achieved?
+	 * @param id Dynamixel ID
+	 * @return true if still in progress, false if completed
+	 */
+	public static boolean isMoving(int id){
+		return (getMoving(id) > 0 ? true : false);
+	}
+	
+	
+	/**
+	 * Returns whether the EEPROM is locked for modification
+	 * @param id
+	 * @return true if locked, false if open
+	 */
+	public static boolean isEEPROMLocked(int id){
+		return(getLock(id) > 0 ? true : false);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	////////
 	
 	/**
 	 * 
@@ -150,6 +437,17 @@ public class Communication {
 	public static void terminate() {
 		IDynamixelControl.INSTANCE.dxl_terminate();
 	}
+	
+	
+
+	
+	
+	
+	////////
+	
+	
+	
+	
 	
 	/* NOT SURE IF NEEDED HERE
 	public static void tx_packet() {
