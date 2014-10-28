@@ -22,9 +22,10 @@ public class FunctionCaller {
 		
 		if (separatedMessage.length != 3) return;
 		
-		String functionName = separatedMessage[0];
-		int id = Integer.parseInt(separatedMessage[1]);
+		int id = Integer.parseInt(separatedMessage[0]);
+		String functionName = separatedMessage[1];
 		int value = Integer.parseInt(separatedMessage[2]);
+		
 		
 		
 		//if (functionName == "setID") DynamixelControl.setID(id, value);
@@ -66,8 +67,8 @@ public class FunctionCaller {
 		
 		if (separatedMessage.length != 2) return -1;
 		
-		String functionName = separatedMessage[0];
-		int id = Integer.parseInt(separatedMessage[1]);
+		int id = Integer.parseInt(separatedMessage[0]);
+		String functionName = separatedMessage[1];
 		
 		if (functionName == "getModelNumber") return DynamixelControl.getModelNumber(id);
 		if (functionName == "getModelNumber") return DynamixelControl.getModelNumber(id);
