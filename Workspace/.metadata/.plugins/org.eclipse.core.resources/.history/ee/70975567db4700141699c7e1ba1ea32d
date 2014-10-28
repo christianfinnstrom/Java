@@ -1,9 +1,0 @@
-package control;
-
-public class BasicOperations {
-	
-	public interface IDynamixelControl2 extends 
-	
-	
-
-}

@@ -12,6 +12,9 @@ public class Test {
 		Actuator a = new Actuator(2);
 		
 		Communication.initialize();
+		
+		Communication.setGoalPosition(2, 30);
+		System.out.println(Communication.getGoalPosition(2));
 
 		
 		System.out.println("ID on 2: " + Communication.readFromDxl(2, 3)); 
