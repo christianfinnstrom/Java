@@ -1,0 +1,90 @@
+package utility;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import dxl_communication.DynamixelControl;
+
+public class FunctionCaller {
+
+	
+	/**
+	 * Set-functions
+	 * @param functionName
+	 * @param ID
+	 * @param value
+	 */
+	public void callFunction(String functionName, int id, int value){
+		
+		
+		
+	}
+	
+	/**
+	 * Overload: Get-functions
+	 * @param functionName 
+	 * @param ID
+	 */
+	public static int callFunction(String functionName, int id){
+		
+		if (functionName == "getModelNumber") return DynamixelControl.getModelNumber(id);
+		if (functionName == "getVersionOfFirmware") return DynamixelControl.getVersionOfFirmware(id);
+		if (functionName == "getID") return DynamixelControl.getID(id);
+		if (functionName == "getBaudrate") return DynamixelControl.getBaudrate(id);
+		if (functionName == "getReturnDelayTime") return DynamixelControl.getReturnDelayTime(id);
+		if (functionName == "getCWAngleLimit") return DynamixelControl.getCWAngleLimit(id);
+		if (functionName == "getCCWAngleLimit") return DynamixelControl.getCCWAngleLimit(id);
+		if (functionName == "getTheHighestLimitTemperature") return DynamixelControl.getTheHighestLimitTemperature(id);
+		if (functionName == "getTheLowestLimitVoltage") return DynamixelControl.getTheLowestLimitVoltage(id);
+		if (functionName == "getTheHighestLimitVoltage") return DynamixelControl.getTheHighestLimitVoltage(id);
+		if (functionName == "getMaxTorque") return DynamixelControl.getMaxTorque(id);
+		if (functionName == "getStatusReturnLevel") return DynamixelControl.getStatusReturnLevel(id);
+		if (functionName == "getAlarmLED") return DynamixelControl.getAlarmLED(id);
+		if (functionName == "getAlarmShutdown") return DynamixelControl.getAlarmShutdown(id);
+		if (functionName == "getTorqueEnable") return DynamixelControl.getTorqueEnable(id);
+		if (functionName == "getLED") return DynamixelControl.getLED(id);
+		if (functionName == "getCWComplianceMargin") return DynamixelControl.getCWComplianceMargin(id);
+		if (functionName == "getCCWComplianceMargin") return DynamixelControl.getCCWComplianceMargin(id);
+		if (functionName == "getCWComplianceSlope") return DynamixelControl.getCWComplianceSlope(id);
+		if (functionName == "getCCWComplianceSlope") return DynamixelControl.getCCWComplianceSlope(id);
+		if (functionName == "getGoalPosition") return DynamixelControl.getGoalPosition(id);
+		if (functionName == "getMovingSpeed") return DynamixelControl.getMovingSpeed(id);
+		if (functionName == "getTorqueLimit") return DynamixelControl.getTorqueLimit(id);
+		if (functionName == "getPresentPosition") return DynamixelControl.getPresentPosition(id);
+		if (functionName == "getPresentSpeed") return DynamixelControl.getPresentSpeed(id);
+		if (functionName == "getPresentLoad") return DynamixelControl.getPresentLoad(id);
+		if (functionName == "getPresentVoltage") return DynamixelControl.getPresentVoltage(id);
+		if (functionName == "getPresentTemperature") return DynamixelControl.getPresentTemperature(id);
+		if (functionName == "getRegistered") return DynamixelControl.getRegistered(id);
+		if (functionName == "getMoving") return DynamixelControl.getMoving(id);
+		if (functionName == "getLock") return DynamixelControl.getLock(id);
+		if (functionName == "getPunch") return DynamixelControl.getPunch(id);
+		if (functionName == "getGoalPositionAngular") return DynamixelControl.getGoalPositionAngular(id);
+		if (functionName == "getPresentPositionAngular") return DynamixelControl.getPresentPositionAngular(id);
+		if (functionName == "getMovementMode") return DynamixelControl.getMovementMode(id);
+		else return 0;
+	}
+	
+	public void stringSeparator(String message){
+		String[] separated = message.split(",");
+		if (separated.length == 3) callFunction(separated[0],Integer.parseInt(separated[1]),Integer.parseInt(separated[2]));
+		else callFunction(separated[0], Integer.parseInt(separated[1]));
+	}
+	
+	
+	public static void main(String args[]){
+		stringSeparator("getMoving,2")
+	}
+	
+	
+	/**
+	 * TODO
+	 * motta string -> call function
+	 * 
+	 * call function -> string
+	 * 
+	 * 
+	 */
+		
+		
+}

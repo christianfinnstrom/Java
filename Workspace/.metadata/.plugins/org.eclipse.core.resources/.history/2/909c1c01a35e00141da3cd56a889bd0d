@@ -1,0 +1,25 @@
+package utility;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class FunctionCaller {
+
+	
+
+	public void callFunction(String functionName, int ID, int value){
+		
+		
+		if (functionName == "setModelNumber") 
+	}
+	/**
+	 * Overload: Get function
+	 * @param functionName 
+	 * @param ID
+	 */
+	public void callFunction(String functionName, int ID){
+		
+	}
+		
+		
+}
