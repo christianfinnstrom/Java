@@ -8,7 +8,7 @@ public class Test {
 	
 	public static void main(String args[]){
 		
-		
+		/*
 		Actuator a = new Actuator(2);
 		
 		Communication.initialize();
@@ -25,6 +25,9 @@ public class Test {
 		
 		
 		Communication.terminate();
+		*/
+		
+		
 		
 	}
 

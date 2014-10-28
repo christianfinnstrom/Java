@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;dictionary&apos; in &apos;dxl_communication.Communication&apos; to &apos;controlTableDictionary&apos;&#x0D;&#x0A;- Original project: &apos;DynamixelControl&apos;&#x0D;&#x0A;- Original element: &apos;dxl_communication.Communication.dictionary&apos;&#x0D;&#x0A;- Renamed element: &apos;dxl_communication.Communication.controlTableDictionary&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;dictionary&apos;" flags="589830" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;dxl_communication{Communication.java[Communication^dictionary" name="controlTableDictionary" references="true" setter="false" stamp="1413903029156" textual="false" version="1.0"/>
+</session>

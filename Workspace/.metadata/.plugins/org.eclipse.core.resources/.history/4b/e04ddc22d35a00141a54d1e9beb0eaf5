@@ -1,0 +1,1017 @@
+package dxl_communication;
+
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+import java_native_access.IDynamixelControl;
+
+
+/*
+ * 
+ * The methods in this class are used for communication between the computer and the Dynamixel actuator(s).
+ * The methods are called from the 
+ * 
+ * 
+ * TODO create a dictionary that contains the control table!
+ * 
+ * 
+ */
+public class Communication {
+	
+	private static int DEFAULT_PORTNUM = 3; //com3
+	private static int DEFAULT_BAUDNUM = 1; //mbps	
+	
+	
+	// Addresses that can not be read as words:
+	public final static int[] singleByteAddresses = {2, 3, 4, 5, 11, 12, 13, 16, 17, 18, 24, 25, 26, 27, 28, 29, 42, 43, 44, 46, 47};
+	
+	/**
+	 * Checks whether this address contains a value that consists of a single byte
+	 * @param actuator address to check
+	 */
+	public static boolean isSingleByteAddress(int address){
+		boolean isSingle = false;
+		for(int i = 0; i < singleByteAddresses.length; ++i){
+			if(singleByteAddresses[i] == address)
+			{
+				isSingle = true;
+				break;
+			}
+		}
+
+		return isSingle;
+	}
+	
+	// Dictionary containing the control table. Key is parameter name, value is address. Rename?
+	static Map<String, Integer> controlTableDictionary = new HashMap<String, Integer>();
+	static{ // dictionary entries: 
+		
+		
+		controlTableDictionary.put("model number(l)", 0);
+		controlTableDictionary.put("model number(h)", 1);
+		controlTableDictionary.put("version of firmware", 2);
+		controlTableDictionary.put("id", 3);
+		controlTableDictionary.put("baud rate", 4);
+		controlTableDictionary.put("return delay time", 5);
+		controlTableDictionary.put("cw angle limit(l)", 6);
+		controlTableDictionary.put("cw angle limit(h)", 7);
+		controlTableDictionary.put("ccw angle limit(l)", 8);
+		controlTableDictionary.put("ccw angle limit(h)", 9);
+		controlTableDictionary.put("the highest limit temperature", 11);
+		controlTableDictionary.put("the lowest limit voltage", 12);
+		controlTableDictionary.put("the highest limit voltage", 13);
+		controlTableDictionary.put("max torque(l)", 14);
+		controlTableDictionary.put("max torque(h)", 15);
+		controlTableDictionary.put("status return level", 16);
+		controlTableDictionary.put("alarm led", 17);
+		controlTableDictionary.put("alarm shutdown", 18);
+		controlTableDictionary.put("torque enable", 24);
+		controlTableDictionary.put("led", 25);
+		controlTableDictionary.put("cw compliance margin", 26);
+		controlTableDictionary.put("ccw compliance margin", 27);
+		controlTableDictionary.put("cw compliance slope", 28);
+		controlTableDictionary.put("ccw compliance slope", 29);
+		controlTableDictionary.put("goal position(l)", 30);
+		controlTableDictionary.put("goal position(h)", 31);
+		controlTableDictionary.put("moving speed(l)", 32);
+		controlTableDictionary.put("moving speed(h)", 33);
+		controlTableDictionary.put("torque limit(l)", 34);
+		controlTableDictionary.put("torque limit(h)", 35);
+		controlTableDictionary.put("present position(l)", 36);
+		controlTableDictionary.put("present position(h)", 37);
+		controlTableDictionary.put("present speed(l)", 38);
+		controlTableDictionary.put("present speed(h)", 39);
+		controlTableDictionary.put("present load(l)", 40);
+		controlTableDictionary.put("present load(h)", 41);
+		controlTableDictionary.put("present voltage", 42);
+		controlTableDictionary.put("present temperature", 43);
+		controlTableDictionary.put("registered", 44);
+		controlTableDictionary.put("moving)", 46);
+		controlTableDictionary.put("lock", 47);
+		controlTableDictionary.put("punch(l)", 48);
+		controlTableDictionary.put("punch(h)", 49);
+	}
+
+	
+	
+	/**********************************************************************************************************************************************************/
+	
+	//TODO legge til beskrivelser fra control table på alle metodene. Legge inn logikk som sjekker for gyldig inn-data?
+	
+
+    /**
+    * Returns the model number of the Dynamixel
+    * @param id Dynamixel actuator ID
+    * @return Model number
+	*/
+	public static int getModelNumber(int id){
+		return readFromDxl(id, controlTableDictionary.get("model number(l)"));
+	}
+	
+	
+    /**
+    * Returns firmware version
+    * @param id Dynamixel actuator ID
+    * @return Firmware version
+	*/
+	public static int getVersionOfFirmware(int id){
+		return readFromDxl(id, controlTableDictionary.get("version of firmware"));
+	}
+	
+	
+
+    /**
+    * Returns the ID of the actuator
+    * 254 is the Broadcast ID
+    * @param id Dynamixel actuator ID (to check)
+    * @return Dynamixel actuator ID, range: 0-254
+	*/
+	public static int getID(int id){
+		return readFromDxl(id, controlTableDictionary.get("id"));
+	}
+	
+    /**
+    * Sets the ID parameter on the Dynamixel actuator
+    * 254 is the Broadcast ID
+    * @param id Dynamixel actuator ID
+    * @param newID New ID value, range: 0-254
+	*/
+	public static void setID(int id, int newID){
+		writeToDxl(id, controlTableDictionary.get("id"), newID);
+	}
+	
+    /**
+    * Returns the baudrate
+    * The Baud Rate represents the communication speed (0-254).
+    * @param id Dynamixel actuator ID
+    * @return Baudrate, range: 0-254
+	*/
+	public static int getBaudrate(int id){
+		return readFromDxl(id, controlTableDictionary.get("baud rate"));
+	}
+	
+	
+    /**
+    * Sets the baudrate
+    * The Baud Rate represents the communication speed (0-254).
+    *
+    * @param id Dynamixel actuator ID
+    * @param newBaud New baudrate value, range: 0-254
+	*/
+	public static void setBaudrate(int id, int newBaud){
+		writeToDxl(id, controlTableDictionary.get("baud rate"), newBaud);
+	}
+	
+    /**
+    * Returns Return Delay Time
+    * Return Delay Time is the delay time from an Instruction Packet is 
+    * transmitted, until a Status Packet is received (0-254).
+    * Unit: 2 usec
+    * @param id Dynamixel actuator ID
+    * @return Return Delay Time, range: 0-254
+	*/
+	public static int getReturnDelayTime(int id){
+		return readFromDxl(id, controlTableDictionary.get("return delay time"));
+	}
+	
+	
+    /**
+    * Set Return Delay Time
+    * Return Delay Time is the delay time from an Instruction Packet is 
+    * transmitted, until a Status Packet is received (0-254).
+    * Unit: 2 usec
+    * @param id Dynamixel actuator ID
+    * @param newReturnDelayTime New Return Delay Time value, range: 0-254
+	*/
+	public static void setReturnDelayTime(int id, int newReturnDelayTime){
+		writeToDxl(id, controlTableDictionary.get("return delay time"), newReturnDelayTime);
+	}
+	
+	
+    /**
+    * Returns the CW Angle Limit
+    * If value is set to 0, Wheel Mode is chosen. Other values, Joint Mode (servo).
+    * @param id Dynamixel actuator ID
+    * @return CW Angle Limit
+	*/
+	public static int getCWAngleLimit(int id){
+		return readFromDxl(id, controlTableDictionary.get("cw angle limit(l)"));
+	}
+	
+    /**
+    * Sets the CW Angle Limit
+    * If value is set to 0, Wheel Mode is chosen. Other values, Joint Mode (servo)
+    * @param id Dynamixel actuator ID
+    * @param newCWAngleLimit New CW Angle Limit value
+	*/
+	public static void setCWAngleLimit(int id, int newCWAngleLimit){
+		// Only checks if the input values are too low, values over 2047 may be used to enter Multi-turn Mode:
+        if (newCWAngleLimit < 0) newCWAngleLimit = 0;
+		writeToDxl(id, controlTableDictionary.get("cw angle limit(l)"), newCWAngleLimit);
+	}
+	
+    /**
+    * Returns the CCW Angle Limit
+    * If value is set to 0, Wheel Mode is chosen. Other values, Joint Mode (servo).
+    * @param id Dynamixel actuator ID
+    * @return CCW Angle Limit
+	*/
+	public static int getCCWAngleLimit(int id){
+		return readFromDxl(id, controlTableDictionary.get("ccw angle limit(l)"));
+	}
+	
+    /**
+    * Sets the CCW Angle Limit
+    * If value is set to 0, Wheel Mode is chosen. Other values, Joint Mode.
+    * @param id Dynamixel actuator ID
+    * @param newCCWAngleLimit New CCW Angle Limit value
+    */
+	public static void setCCWAngleLimit(int id, int newCCWAngleLimit){
+		// Only checks if the input values are too low, values over 2047 may be used to enter Multi-turn Mode:
+        if (newCCWAngleLimit < 0) newCCWAngleLimit = 0;
+		writeToDxl(id, controlTableDictionary.get("ccw angle limit(l)"), newCCWAngleLimit);
+	}
+	
+    /**
+    * Returns the Highest Limit Temperature
+    * NB! Should not be changed from its default value (70).
+    * @param id Dynamixel actuator ID
+    * @return Highest Limit Temperature
+	*/
+	public static int getTheHighestLimitTemperature(int id){
+		return readFromDxl(id, controlTableDictionary.get("the highest limit temperature"));
+	}
+	
+	
+
+    /**
+    * Sets the Highest Limit Temperature
+    * NB! Should not be changed from its default value (70). 
+    * @param id Dynamixel actuator ID
+    * @param valu New Highest Limit Temperature value
+    */
+	public static void setTheHighestLimitTemperature(int id, int value){
+		writeToDxl(id, controlTableDictionary.get("the highest limit temperature"), value);
+	}
+
+
+    /**
+    * Returns the Lowest Limit Voltage
+    * Lowest Limit Voltage is the lowest value in the voltage operation range.
+    * Valid values: 50 - 250. 
+    * Unit: 0.1V
+    * @param id Dynamixel actuator ID
+    * @return Lowest Limit Voltage
+	*/
+	public static int getTheLowestLimitVoltage(int id){
+		return readFromDxl(id, controlTableDictionary.get("the lowest limit voltage"));
+	}
+	
+
+    /**
+    * Sets the Lowest Limit Voltage
+    * Lowest Limit Voltage is the lowest value in the voltage operation range.
+    * Valid values: 50 - 250.
+    * Unit: 0.1V
+    * @param id Dynamixel actuator ID
+    * @param value New Lowest Limit Voltage value, range: 50-250
+    */
+	public static void setTheLowestLimitVoltage(int id, int value){
+		if (value < 50) value = 50;
+        if (value > 250) value = 250;
+		writeToDxl(id, controlTableDictionary.get("the lowest limit voltage"), value); 
+	}
+	
+    /**
+    * Returns the Highest Limit Voltage
+    * Highest Limit Voltage is the highest value in the voltage operation range.
+    * Valid values: 50 - 250.
+    * Unit: 0.1V
+    * @param id Dynamixel actuator ID
+    * @return Highest Limit Voltage
+	*/
+	public static int getTheHighestLimitVoltage(int id){
+		return readFromDxl(id, controlTableDictionary.get("the highest limit voltage"));
+	}
+	
+    /**
+    * Sets the Highest Limit Voltage
+    * Highest Limit Voltage is the highest value in the voltage operation range.
+    * Valid values: 50 - 250.
+    * Unit: 0.1V
+    * @param id Dynamixel actuator ID
+    * @param value New Highest Limit Voltage value, range: 50-250
+    */
+	public static void setTheHighestLimitVoltage(int id, int value){
+		 if (value < 50) value = 50;
+         if (value > 250) value = 250;
+		writeToDxl(id, controlTableDictionary.get("the highest limit voltage"), value);
+	}
+	
+    /**
+    * Returns Max Torque
+    * How much torque the actuator produces.
+    * Valid values: 0 - 1023 (0% - 100%). 
+    * @param id Dynamixel actuator ID
+    * @return Max Torque, range: 0-1023
+    */
+	public static int getMaxTorque(int id){
+		return readFromDxl(id, controlTableDictionary.get("max torque(l)"));
+	}
+	
+	
+    /**
+    * Sets the Max Torque
+    * How much torque the actuator produces.
+    * Valid values: 0 - 1023 (0% - 100%).  
+    * @param id Dynamixel actuator ID
+    * @param value New Max Torque value, range: 0-1023
+    */
+	public static void setMaxTorque(int id, int value){
+		if (value < 0) value = 0;
+        if (value > 1023) value = 1023;
+		writeToDxl(id, controlTableDictionary.get("max torque(l)"), value);
+	}
+	
+	
+
+    /**
+    * Returns Status Return Level
+    * Decides how to return the Status Packet.
+    * Value 0: No return against all commands (except PING)
+    * Value 1: Return only for the READ command
+    * Value 2: Return for all commands
+    * @param id Dynamixel actuator ID
+    * @return Status Return Level, 0, 1 or 2
+	*/
+	public static int getStatusReturnLevel(int id){
+		return readFromDxl(id, controlTableDictionary.get("status return level"));
+	}
+	
+	
+    /**
+    * Sets the Status Return Level
+    * Decides how to return the Status Packet.
+    * Value 0: No return against all commands (except PING)
+    * Value 1: Return only for the READ command
+    * Value 2: Return for all commands
+    * @param id Dynamixel actuator ID
+    * @param value New Status Return Level value, 0, 1 or 2
+    */
+	public static void setStatusReturnLevel(int id, int value){
+		if (value < 0 || value > 3) return;
+		else writeToDxl(id, controlTableDictionary.get("status return level"), value);
+	}
+	
+	
+    /**
+    * Returns Alarm LED status
+    * @param id Dynamixel actuator ID
+    * @return 0 if off, 1 else
+	*/
+	public static int getAlarmLED(int id){
+		return readFromDxl(id, controlTableDictionary.get("alarm led"));
+	}
+
+    /**
+    * Sets the Alarm LED
+    * Off: 0, on: 1
+    * @param id Dynamixel actuator ID
+    * @param value New Alarm LED status value, 0 or 1
+	*/
+	public static void setAlarmLED(int id, int value){
+		if (value != 0 || value != 1) return;
+		else writeToDxl(id, controlTableDictionary.get("alarm led"), value);
+	}
+	
+	
+
+    /**
+    * Returns Alarm Shutdown status
+    * The Dynamixel can protect itself by detecting errors during operation.
+    * At shutdown, Torque limit is set to 0. 
+    * The settings depend on values in a byte; each bit decides whether 
+    * the error corresponding to that byte-position is to be detected or not (logic OR on each bit):
+    * 
+    * Bit 7: 0
+    * Bit 6: Instruction error
+    * Bit 5: Overload error
+    * Bit 4: CheckSum error
+    * Bit 3: Range error
+    * Bit 2: Overheating error
+    * Bit 1: Angle limit error
+    * Bit 0: Input voltage error
+    * 
+    * Example: 0X05 (00000101) will turn on both Input voltage error and Overheating error.
+    * @param id Dynamixel actuator ID
+    * @return See description
+	*/
+	public static int getAlarmShutdown(int id){
+		return readFromDxl(id, controlTableDictionary.get("alarm shutdown"));
+	}
+	
+	
+    /**
+    * Sets the Alarm Shutdown 
+    * The Dynamixel can protect itself by detecting errors during operation.
+    * At shutdown, Torque limit is set to 0. 
+    * The settings depend on values in a byte; each bit decides whether 
+    * the error corresponding to that byte-position is to be detected or not (logic OR on each bit):
+    * 
+    * Bit 7: 0
+    * Bit 6: Instruction error
+    * Bit 5: Overload error
+    * Bit 4: CheckSum error
+    * Bit 3: Range error
+    * Bit 2: Overheating error
+    * Bit 1: Angle limit error
+    * Bit 0: Input voltage error
+    * 
+    * Example: 0X05 (00000101) will turn on both Input voltage error and Overheating error.
+    * @param id Dynamixel actuator ID
+    * @param value New Alarm Shutdown value (see description)
+    */
+	public static void setAlarmShutdown(int id, int value){
+		writeToDxl(id, controlTableDictionary.get("alarm shutdown"), value);
+	}
+	
+	
+
+    /**
+    * Returns Torque Enable
+    * @param id Dynamixel actuator ID
+    * @return Off: 0, on: 1
+	*/
+	public static int getTorqueEnable(int id){
+		return readFromDxl(id, controlTableDictionary.get("torque enable"));
+	}
+	
+
+    /**
+    * Sets the Torque Enable status
+    * @param id Dynamixel actuator ID
+    * @param value Off: 0, on: 1
+    */
+	public static void setTorqueEnable(int id, int value){
+		if (value != 0 || value != 1) return;
+		else writeToDxl(id, controlTableDictionary.get("torque enable"), value);
+	}
+	
+    /**
+    * Returns LED status
+    * Based on values in a byte (logic OR on each bit)
+    * @param id Dynamixel actuator ID
+    * @return Bit 2: BLUE LED, Bit 1: GREEN, Bit 0: RED LED
+	*/
+	public static int getLED(int id){
+		return readFromDxl(id, controlTableDictionary.get("led"));
+	}
+	
+	
+    /**
+    * Sets the LED status
+    * Based on values in a byte (logic OR on each bit)
+    * @param id Dynamixel actuator ID
+    * @param value Bit 2: BLUE LED, Bit 1: GREEN, Bit 0: RED LED
+	*/
+	public static void setLED(int id, int value){
+		writeToDxl(id, controlTableDictionary.get("led"), value);
+	}
+	
+    /**
+    * Returns the CW Compliance Margin
+    * The margin designates the area around the goal position that receives no torque
+    * @param id Dynamixel actuator ID
+    * @return CW Compliance Margin, range: 0-255
+	*/
+	public static int getCWComplianceMargin(int id){
+		return readFromDxl(id, controlTableDictionary.get("cw compliance margin"));
+	}
+
+	
+    /**
+    * Sets the CW Compliance Margin
+    * The margin designates the area around the goal position that receives no torque
+    * @param id Dynamixel actuator ID
+    * @param value New CW Compliance Margin value, range: 0-255
+	*/
+	public static void setCWComplianceMargin(int id, int value){
+		if (value < 0) value = 0;
+        if (value > 255) value = 255;
+		writeToDxl(id, controlTableDictionary.get("cw compliance margin"), value);
+	}
+	
+    /**
+    *  Returns the CCW Compliance Margin
+    * The margin designates the area around the goal position that receives no torque
+    * @param id Dynamixel actuator ID
+    * @return CCW Compliance Margin, range: 0-255
+	*/
+	public static int getCCWComplianceMargin(int id){
+		return readFromDxl(id, controlTableDictionary.get("ccw compliance margin"));
+	}
+
+    /**
+    * Sets the CCW Compliance Margin
+    * The margin designates the area around the goal position that receives no torque
+    * @param id Dynamixel actuator ID
+    * @param value New CCW Compliance Margin value, range: 0-255
+	*/
+	public static void setCCWComplianceMargin(int id, int value){
+		if (value < 0) value = 0;
+        if (value > 255) value = 255;
+		writeToDxl(id, controlTableDictionary.get("ccw compliance margin"), value);
+	}
+	
+    /**
+    * Returns the CW Compliance Slope
+    * Sets the level of torque near the goal position.
+    * There are seven levels; higher value means more flexibility:
+    * 
+    * 2, 4, 8, 16, 32, 64, 128 
+    *
+    * @param id Dynamixel actuator ID
+    * @return CW Compliance Slope (see description)
+	*/
+	public static int getCWComplianceSlope(int id){
+		return readFromDxl(id, controlTableDictionary.get("cw compliance slope"));
+	}
+
+    /**
+    * Sets the CW Compliance Slope
+    * Sets the level of torque near the goal position.
+    * There are seven levels; higher value means more flexibility:
+    * 
+    * 2, 4, 8, 16, 32, 64, 128
+    * @param id Dynamixel actuator ID
+    * @param value New CW Compliance Slope value (2, 4, 8, 16, 32, 64, 128) 
+	*/
+    public static void setCWComplianceSlope(int id, int value){
+    	if (value < 0) value = 0;
+        if (value > 255) value = 254;
+		writeToDxl(id, controlTableDictionary.get("cw compliance slope"), value);
+	}
+	
+
+    /**
+    * Returns the CCW Compliance Slope
+    * Sets the level of torque near the goal position.
+    * There are seven levels; higher value means more flexibility:
+    * 
+    * 2, 4, 8, 16, 32, 64, 128
+    * @param id Dynamixel actuator ID
+    * @return CCW Compliance Slope (see description)
+	*/
+	public static int getCCWComplianceSlope(int id){
+		return readFromDxl(id, controlTableDictionary.get("ccw compliance slope"));
+	}
+
+	
+    /**
+    * Sets the CCW Compliance Slope
+    * Sets the level of torque near the goal position.
+    * There are seven levels; higher value means more flexibility:
+    *  
+    * 2, 4, 8, 16, 32, 64, 128
+    * @param id Dynamixel actuator ID
+    * @param value New CCW Compliance Slope value (2, 4, 8, 16, 32, 64, 128)
+    */
+	public static void setCCWComplianceSlope(int id, int value){
+		if (value < 0) value = 0;
+        if (value > 255) value = 254;
+		writeToDxl(id, controlTableDictionary.get("ccw compliance slope"), value);
+	}
+	
+	
+    /**
+    * Returns the Goal Position
+    * 
+    * 0-1023, the unit is 0.29 degrees.
+    * 
+    * If Goal Position is out of range, Alarm Limit Error will be triggered, and 
+    * Alarm LED/Alarm Shutdown will be executed.
+    * @param id Dynamixel actuator ID
+    * @return Goal Position, range: 0-1023
+	*/
+	public static int getGoalPosition(int id){
+		return readFromDxl(id, controlTableDictionary.get("goal position(l)"));
+	}
+	
+    /**
+    * Sets the Goal Position 
+    * 0-1023, the unit is 0.29 degrees.
+    * If Goal Position is out of range, Alarm Limit Error will be triggered, and 
+    * Alarm LED/Alarm Shutdown will be executed. 
+    * @param id Dynamixel actuator ID
+    * <param value New Goal Position value, range: 0-1023
+    */
+	public static void setGoalPosition(int id, int value){
+		if (value < 0) value = 0;
+        if (value > 1023) value = 1023;
+		writeToDxl(id, controlTableDictionary.get("goal position(l)"), value);
+	}
+	
+
+    /**
+    * Returns the Moving Speed 
+    * Range and unit of the value varies, depending on operation mode:
+    * 
+    * JOINT MODE - range: 0-1023, unit: 0.111rpm, example: value 300 --> 33.3rpm
+    * WHEEL MODE - range: 0-2047 (0-1023 CCW, 1024-2047 CW), unit: 0.1%
+    * @param id Dynamixel actuator ID
+    * @return Moving Speed (see description)
+	*/
+	public static int getMovingSpeed(int id){
+		return readFromDxl(id, controlTableDictionary.get("moving speed(l)"));
+	}
+	
+	
+    /**
+    * Sets the Moving Speed  
+    * Range and unit of the value varies, depending on operation mode:
+    * 
+    * JOINT MODE - range: 0-1023, unit: 0.111rpm, example: value 300 --> 33.3rpm
+    * WHEEL MODE - range: 0-2047 (0-1023 CCW, 1024-2047 CW), unit: 0.1% 
+    * @param id Dynamixel actuator ID
+    * <param value New Moving Speed value (see description)
+	*/
+	public static void setMovingSpeed(int id, int value){
+        if (value < 0) value = 0;
+        else
+        {
+            if (getMovementMode(id) == 0) // WHEEL MODE
+            {
+                if (value < 2047) value = 2047;
+            }
+            else // JOINT MODE
+            {
+                if (value < 1023) value = 1023;
+            }
+        }
+		writeToDxl(id, controlTableDictionary.get("moving speed(l)"), value);
+	}
+	
+	
+    /**
+    * Returns the Torque Limit
+    * Range: 0-1023, unit: 0.1%
+    * @param id Dynamixel actuator ID
+    * @return Torque Limit
+	*/
+	public static int getTorqueLimit(int id){
+		return readFromDxl(id, controlTableDictionary.get("torque limit(l)"));
+	}
+	
+    /**
+    * Sets the Torque Limit
+    * Range: 0-1023, unit: 0.1%
+    * @param id Dynamixel actuator ID
+    * <param value New Torque Limit value, range: 0-1023
+    */
+	public static void setTorqueLimit(int id, int value){
+		if (value < 0) value = 0;
+        if (value > 1023) value = 1023;
+		writeToDxl(id, controlTableDictionary.get("torque limit(l)"), value);
+	}
+	
+    /**
+    * Returns Present Position
+    * Range: 0-1023, unit: 0.29 degrees
+    * @param id Dynamixel actuator ID
+    * @return Present Position
+    */
+	public static int getPresentPosition(int id){
+		return readFromDxl(id, controlTableDictionary.get("present position(l)"));
+	}
+	
+	
+    /**
+    * Returns the Present Speed
+    * Range: 0-2047 (0-1023 CCW, 1024-2047 CW)
+    * Units: JOINT MODE: 0.111rpm, WHEEL MODE: 0.1% 
+    * @param id Dynamixel actuator ID
+    * @return Present Speed (see description)
+	*/
+	public static int getPresentSpeed(int id){
+		return readFromDxl(id, controlTableDictionary.get("present speed(l)"));
+	}
+	
+	
+    /**
+    * Returns the Present Load
+    * Range: 0-2047 (0-1023 CCW, 1024-2047 CW)
+    * Unit: 0.1%
+    * @param id Dynamixel actuator ID
+    * @return Present Load
+	*/
+	public static int getPresentLoad(int id){
+		return readFromDxl(id, controlTableDictionary.get("present load(l)"));
+	}
+	
+	
+    /**
+    * Returns Present Voltage
+    * Unit: value * 10 = Voltage
+    * @param id Dynamixel actuator ID
+    * @return Present Voltage
+    */
+	public static int getPresentVoltage(int id){
+		return readFromDxl(id, controlTableDictionary.get("present voltage"));
+	}
+	
+    /**
+    * Returns Present Temperature
+    * Internal temperature of the Dynamixel
+    * Unit: Degrees Celsius
+    * @param id Dynamixel actuator ID
+    * @return Present Temperature
+    */
+	public static int getPresentTemperature(int id){
+		return readFromDxl(id, controlTableDictionary.get("present temperature"));
+	}
+	
+    /**
+    * Returns whether Instruction is registered
+    * @param id Dynamixel actuator ID
+    * @return False: 0, true: 1
+	*/
+	public static int getRegistered(int id){
+		return readFromDxl(id, controlTableDictionary.get("registered"));
+	}
+	
+	
+    /**
+    * Returns whether there is any movement
+    * @param id Dynamixel actuator ID
+    * @return False: 0, true: 1
+	*/
+	public static int getMoving(int id){
+		return readFromDxl(id, controlTableDictionary.get("moving"));
+	}
+	
+
+    /**
+    * Returns whether EEPROM is locked
+    * EEPROM is a memory area (addresses 0-18) that can be locked from modification
+    * @param id Dynamixel actuator ID
+    * @return False: 0, true: 1
+    */
+	public static int getLock(int id){
+		return readFromDxl(id, controlTableDictionary.get("lock"));
+	}
+	
+
+    /**
+    * Sets the EEPROM lock
+    * EEPROM is a memory area (addresses 0-18) that can be locked from modification
+    * @param id Dynamixel actuator ID
+    * @param value Lock: 1, unlock: 0
+    */
+	public static void setLock(int id, int value){
+		if(value != 0 || value != 1) return; // make sure that the value will be either 0 or 1 
+		else writeToDxl(id, controlTableDictionary.get("lock"), value);
+	}
+	
+    /**
+    * Returns the Punch 
+    * Punch is the minimum voltage that will be applied to the motor when the position 
+    * is just outside the compliance margin. It is needed to overcome internal gear friction.
+    * Default value: 32
+    * @param id Dynamixel actuator ID
+    * @return Punch
+	*/
+	public static int getPunch(int id){
+		return readFromDxl(id, controlTableDictionary.get("punch(l)"));
+	}
+	
+	
+    /**
+    * Sets the Punch
+    * Punch is the minimum voltage that will be applied to the motor when the position
+    * is just outside the compliance margin. It is needed to overcome internal gear friction.
+    * Default value: 32
+    * @param id
+    * @param value New Punch value, range: 32-1023
+    */
+	public static void setPunch(int id, int value){
+		if (value < 32) value = 32;
+        if (value > 1023) value = 1023;
+		writeToDxl(id, controlTableDictionary.get("punch(l)"), value);
+	}
+	
+	
+	
+	
+	
+	
+	
+/*********************************************************************************************************************************************************
+
+	
+	
+	
+	
+	// ADDITIONAL METHODS
+	
+
+    /**
+    * Toggles the Torque on or off
+    * @param id Dynamixel actuator ID
+	*/
+	public void torqueEnableSwitch(int id){
+		int status = getTorqueEnable(id);
+		if(status > 0) setTorqueEnable(id, 0); // if on, turn off
+		else setTorqueEnable(id, 1); // if off, turn on
+	}
+	
+
+    /**
+    * Returns whether an Instruction has been registered or not
+    * @param id Dynamixel actuator ID
+    * @return true/false
+	*/
+	public static boolean isInstructionRegistered(int id){
+		return (getRegistered(id) > 0 ?  true : false);
+	}
+	
+	
+
+    /**
+    * Returns whether an Dynamixel actuator is moving or not
+    * @param  actuator ID
+    * @return true/false
+	*/
+	public static boolean isMoving(int id){
+		return (getMoving(id) > 0 ? true : false);
+	}
+	
+	
+    /**
+    * Returns whether EEPROM is locked or not
+    * EEPROM is a memory area (addresses 0-18) that can be locked
+    * @param id
+    * @return true/false
+	*/
+	public static boolean isEEPROMLocked(int id){
+		return(getLock(id) > 0 ? true : false);
+	}
+	
+
+    /**
+    * Turns on WHEEL MODE on the Dynamixel actuator
+    * WHEEL MODE: The actuator rotates 360 degrees like a regular motor
+    * @param id
+    */
+	public static void toggleWheelMode(int id){
+		setCWAngleLimit(id, 0);
+		setCCWAngleLimit(id, 0);
+	}
+	
+	
+    /**
+    * Turns on JOINT MODE on the Dynamixel actuator
+    * JOINT MODE: The actuator moves at a set angle range (CW angle limit, CCW angle limit)
+    * @param id Dynamixel actuator ID
+    * @param newCWAngleLimit New CW Angle Limit
+    * @param newCCWAngleLimit New CCW Angle Limit
+    */
+	public static void toggleJointMode(int id, int newCWAngleLimit, int newCCWAngleLimit){
+		setCWAngleLimit(id, newCWAngleLimit);
+		setCCWAngleLimit(id, newCCWAngleLimit);
+	}
+	
+    /**
+    * Returns the goal position as an angular value
+    * @param id Dynamixel actuator ID
+    * @return Angular goal position value
+	*/
+	public static int getGoalPositionAngular(int id){
+		return angularValueFromDxlValue(getGoalPosition(id));
+	}
+	
+    /**
+    * Sets the goal position based on angular input
+    * @param id Dynamixel actuator ID
+    * @param angularPosition Angular goal position value
+    */
+	public static void setGoalPositionAngular(int id, int angularPosition){
+		setGoalPosition(id, angularValueToDxlValue(angularPosition));
+	}
+	
+    /**
+    * Returns the present position as an angular value
+    * @param id Dynamixel actuator ID
+    * @return Position as angular value
+	*/
+	public static int getPresentPositionAngular(int id){
+		return angularValueFromDxlValue(getPresentPosition(id));
+	}
+	
+    /**
+    * Returns Dynamixel actuator movement mode (WHEEL MODE or JOINT MODE (servo))
+    * @param id Dynamixel actuator ID
+    * @return WHEEL MDOE: 0, JOINT MODE: 1
+	*/
+	public static int getMovementMode(int id){
+		if(getCWAngleLimit(id) == 0 && getCCWAngleLimit(id) == 0) return 0; // WHEEL MODE
+		else return 1; // JOINT MODE
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+
+	// BASE FUNCTIONS:
+	
+    /**
+    * Attempts to initialize the communication devices
+    * @return 1 if success, 0 if failure
+	*/
+	public static int initialize()	{
+		return IDynamixelControl.INSTANCE.dxl_initialize(DEFAULT_PORTNUM, DEFAULT_BAUDNUM);
+	}
+
+	/**
+	 * Terminates the communication devices
+	 */
+	public static void terminate() {
+		IDynamixelControl.INSTANCE.dxl_terminate();
+	}
+	
+    
+    /** 
+    * Reads a byte or word from the Dynamixel actuator
+    * @param id Dynamixel actuator ID
+    * @param address Memory address to read from (see Control Table)
+    * @return Value at the memory address
+    */
+	public static int readFromDxl(int id, int address){
+		if(isSingleByteAddress(address)) return readByteFromDxl(id, address);
+		else return readWordFromDxl(id, address);
+	}
+	
+    /**
+    * Writes a byte or word to the Dynamixel actuator
+    * (checks whether the input is a byte or word before execution)
+    * @param id Dynamixel actuator ID
+    * @param address Memory address to write to (see Control Table)
+    * @param value Value to write
+    */
+	public static void writeToDxl(int id, int address,int value){
+		if(isSingleByteAddress(address)) writeByteToDxl(id, address, value);
+		else writeWordToDxl(id, address, value);
+		
+	}
+	
+	
+	
+	
+	
+	// The following subroutines are used internally:
+	
+	private static void writeByteToDxl(int id, int address, int value){
+		IDynamixelControl.INSTANCE.dxl_write_byte(id, address, value);
+	}
+	
+	private static void writeWordToDxl(int id, int address, int value){
+		IDynamixelControl.INSTANCE.dxl_write_word(id, address, value);
+	}
+	
+	private static int readByteFromDxl(int id, int address){
+		return IDynamixelControl.INSTANCE.dxl_read_byte(id, address);
+	}
+	
+	private static int readWordFromDxl(int id, int address){
+		return IDynamixelControl.INSTANCE.dxl_read_word(id, address);
+	}
+	
+	// Converts a Dxl position value into an angular value
+	private static int angularValueFromDxlValue(int value){
+		return (int)(value * 0.29); // 0.29 degrees/DxlPositionValue
+	}
+	
+	// Converts an angular value into a Dxl position value
+	private static int angularValueToDxlValue(int value){
+		return (int)(value / 0.29); // 0.29 degrees/DxlPositionValue
+	}
+
+}
