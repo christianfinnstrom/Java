@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;dxl_communication.Communication&apos; to &apos;DynamixelControl&apos;&#x0D;&#x0A;- Original project: &apos;DynamixelControl&apos;&#x0D;&#x0A;- Original element: &apos;dxl_communication.Communication&apos;&#x0D;&#x0A;- Renamed element: &apos;dxl_communication.DynamixelControl&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Communication&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;dxl_communication{Communication.java[Communication" matchStrategy="1" name="DynamixelControl" qualified="false" references="true" similarDeclarations="false" stamp="1414498990204" textual="false" version="1.0"/>
+</session>

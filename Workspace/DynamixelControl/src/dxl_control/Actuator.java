@@ -1,6 +1,6 @@
 package dxl_control;
 
-import dxl_communication.Communication;
+import dxl_communication.DynamixelControl;
 import java_native_access.IDynamixelControl;
 
 
@@ -36,17 +36,13 @@ public class Actuator {
 	
 	
 	
-
-	
-	
-	
 	/**
 	 * This should automatically choose between byte and word
 	 * 
 	 * @return
 	 */
 	private int readStatus(int address){
-		return Communication.readFromDxl(this.ID, address);
+		return DynamixelControl.readFromDxl(this.ID, address);
 	}
 	
 	/**
@@ -54,7 +50,7 @@ public class Actuator {
 	 */
 	private void writeInstruction(int address, int value){
 
-		Communication.writeToDxl(this.ID, address, value);
+		DynamixelControl.writeToDxl(this.ID, address, value);
 		
 	}
 	

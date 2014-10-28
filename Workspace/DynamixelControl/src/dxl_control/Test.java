@@ -1,6 +1,6 @@
 package dxl_control;
 
-import dxl_communication.Communication;
+import dxl_communication.DynamixelControl;
 
 
 public class Test {
