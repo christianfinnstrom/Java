@@ -68,6 +68,9 @@ public class TCPClient
    }
 
    public static void sendToDynamixelComputer(String message){
+	   
+	   OutputStream outToServer = client.getOutputStream();
+       DataOutputStream out = new DataOutputStream(outToServer);
 	   out.
 	   
    }

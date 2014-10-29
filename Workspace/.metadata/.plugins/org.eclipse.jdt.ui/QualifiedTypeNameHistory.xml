@@ -5,9 +5,15 @@
 <fullyQualifiedTypeName name="java_native_access.IDynamixelControl"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="utility.UtilityClass"/>
 <fullyQualifiedTypeName name="dxl_communication.Communication"/>
+<fullyQualifiedTypeName name="utility.FunctionCaller"/>
+<fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction"/>
+<fullyQualifiedTypeName name="dxl_communication.DynamixelControl"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="org.omg.CORBA.portable.ValueOutputStream"/>
+<fullyQualifiedTypeName name="java.io.DataOutputStream"/>
+<fullyQualifiedTypeName name="gui.MotorControlPanel"/>
 </qualifiedTypeNameHistroy>
