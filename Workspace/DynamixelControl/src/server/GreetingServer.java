@@ -3,6 +3,8 @@ package server;
 import java.net.*;
 import java.io.*;
 
+import utility.FunctionCaller;
+
 public class GreetingServer extends Thread
 {
    private ServerSocket serverSocket;
@@ -12,7 +14,7 @@ public class GreetingServer extends Thread
 	   //open serversocket on specified port
 	   serverSocket = new ServerSocket(port);
 	   //Set to timeout if no client connects within specified milliseconds. 0 means infinity.
-	   serverSocket.setSoTimeout(100000);
+	   serverSocket.setSoTimeout(0);
    }
 
    public void run()
@@ -32,7 +34,10 @@ public class GreetingServer extends Thread
             boolean done = false;
             while(!done){
             	try{
-            		System.out.println(in.readUTF());
+            		String messageFromClient = in.readUTF();
+            		System.out.println(messageFromClient);
+            		
+            		FunctionCaller.callSetFunction(messageFromClient);
             		
             	}catch(IOException e){
             		done = true;
@@ -55,16 +60,16 @@ public class GreetingServer extends Thread
       }
    }
    
-   public static void main(String [] args)
-   {
-      int port = Integer.parseInt(args[0]);
-      try
-      {
-         Thread t = new GreetingServer(port);
-         t.start();
-      }catch(IOException e)
-      {
-         e.printStackTrace();
-      }
-   }
+//   public static void main(String [] args)
+//   {
+//      int port = Integer.parseInt(args[0]);
+//      try
+//      {
+//         Thread t = new GreetingServer(port);
+//         t.start();
+//      }catch(IOException e)
+//      {
+//         e.printStackTrace();
+//      }
+//   }
 }

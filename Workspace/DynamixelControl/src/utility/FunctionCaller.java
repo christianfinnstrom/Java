@@ -1,10 +1,5 @@
 package utility;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
 
 import dxl_communication.DynamixelControl;
 
@@ -18,6 +13,7 @@ public class FunctionCaller {
 	 * @param value
 	 */
 	public static void callSetFunction(String message){
+		
 		String[] separatedMessage = stringSeparator(message);
 		
 		if (separatedMessage.length != 3) return;
@@ -25,6 +21,9 @@ public class FunctionCaller {
 		int id = Integer.parseInt(separatedMessage[0]);
 		String functionName = separatedMessage[1];
 		int value = Integer.parseInt(separatedMessage[2]);
+		System.out.println(id);
+		System.out.println(functionName);
+		System.out.println(value);
 		
 		
 		
@@ -114,6 +113,9 @@ public class FunctionCaller {
 		return message.split(",");	
 		
 	}
+	
+
+
 	
 	
 	
