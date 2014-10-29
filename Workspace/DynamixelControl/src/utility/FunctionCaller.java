@@ -21,9 +21,7 @@ public class FunctionCaller {
 		int id = Integer.parseInt(separatedMessage[0]);
 		String functionName = separatedMessage[1];
 		int value = Integer.parseInt(separatedMessage[2]);
-		System.out.println(id);
-		System.out.println(functionName);
-		System.out.println(value);
+
 		
 		
 		

@@ -9,11 +9,14 @@
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="utility.UtilityClass"/>
 <fullyQualifiedTypeName name="dxl_communication.Communication"/>
-<fullyQualifiedTypeName name="utility.FunctionCaller"/>
 <fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction"/>
 <fullyQualifiedTypeName name="dxl_communication.DynamixelControl"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="org.omg.CORBA.portable.ValueOutputStream"/>
 <fullyQualifiedTypeName name="java.io.DataOutputStream"/>
+<fullyQualifiedTypeName name="server.GreetingServer"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="gui.MotorControlPanel"/>
+<fullyQualifiedTypeName name="client.TCPClient"/>
+<fullyQualifiedTypeName name="utility.FunctionCaller"/>
 </qualifiedTypeNameHistroy>
