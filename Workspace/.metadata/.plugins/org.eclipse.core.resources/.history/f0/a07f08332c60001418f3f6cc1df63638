@@ -26,7 +26,7 @@ public class FunctionCaller {
 		
 		
 		//if (functionName == "setID") DynamixelControl.setID(id, value);
-		if (functionName == "Set baudrate") DynamixelControl.setBaudrate(id, value);
+		if (functionName == "setBaudrate") DynamixelControl.setBaudrate(id, value);
 		if (functionName == "setReturnDelayTime") DynamixelControl.setReturnDelayTime(id, value);
 		if (functionName == "setCWAngleLimit") DynamixelControl.setCWAngleLimit(id, value);
 		if (functionName == "setCCWAngleLimit") DynamixelControl.setCCWAngleLimit(id, value);

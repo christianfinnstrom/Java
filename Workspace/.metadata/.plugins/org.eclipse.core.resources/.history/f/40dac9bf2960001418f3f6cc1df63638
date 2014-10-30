@@ -106,7 +106,6 @@ import javax.swing.*;
 		
 		okSetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				setFunction = (String) setList.getSelectedItem();
 				setSliderValue = setSlider.getValue();
 				okSetPressed = true;
 			}

@@ -33,27 +33,18 @@ public class Test {
 				motorControlPanel.okIdPressed = false;
 			}
 			
-			//SET-pressed
+			//TODO må legge inn knapper til "get" og kalle riktig "if" hvis den blir trykket på
 			if (motorControlPanel.okSetPressed){
 				
-				//TODO Dette må hente ut functionName fra gui automatisk
-				String message = TCPClient.createMessageString(motorControlPanel.id, motorControlPanel.setFunction,
+				//TODO Dette må hente ut ID og functionName fra gui automatisk
+				String message = TCPClient.createMessageString(2, "setGoalPosition",
 						motorControlPanel.setSliderValue);
 				tcpClient.sendToDynamixelComputer(message);
 				
-				motorControlPanel.okSetPressed = false;
-			}
-			
-			//GET-pressed
-			if (motorControlPanel.okGetPressed){
-				
-				String message = TCPClient.createMessageString(motorControlPanel.id, "setGoalPosition");
-				tcpClient.sendToDynamixelComputer(message);
-				
-				//TODO bruk denne verdien og set den i riktig plass
+				//Skal skrive ut melding fra server. Funker fint. Skal kun brukes når "get-knapp" trykkes.
 				System.out.println(tcpClient.readFromDynamixelComputer());
 				
-				motorControlPanel.okGetPressed = false;
+				motorControlPanel.okSetPressed = false;
 			}
 		}
 		

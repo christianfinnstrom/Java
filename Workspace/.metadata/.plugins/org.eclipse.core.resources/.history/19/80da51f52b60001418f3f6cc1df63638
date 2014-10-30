@@ -49,8 +49,7 @@ public class Test {
 				
 				String message = TCPClient.createMessageString(motorControlPanel.id, "setGoalPosition");
 				tcpClient.sendToDynamixelComputer(message);
-				
-				//TODO bruk denne verdien og set den i riktig plass
+				//Skal skrive ut melding fra server. Funker fint. Skal kun brukes når "get-knapp" trykkes.
 				System.out.println(tcpClient.readFromDynamixelComputer());
 				
 				motorControlPanel.okGetPressed = false;

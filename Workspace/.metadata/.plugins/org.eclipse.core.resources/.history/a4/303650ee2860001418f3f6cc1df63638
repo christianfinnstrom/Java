@@ -19,9 +19,6 @@ import javax.swing.*;
 		public boolean okGetPressed = false;
 		public boolean okIdPressed = false;
 		
-		public String setFunction = "";
-		public String getFunction = "";
-		
 		public boolean cancelPressed = false;
 		private JFrame mainFrame;
 		
@@ -66,8 +63,8 @@ import javax.swing.*;
 		String[] setFunctions = { "Set goal position", "Set baudrate" };
 		String[] getFunctions = { "Get goal position", "Get baudrate" };
 		
-		final JComboBox<String> setList = new JComboBox<String>(setFunctions);
-		final JComboBox<String> getList = new JComboBox<String>(getFunctions);
+		JComboBox<String> setList = new JComboBox<String>(setFunctions);
+		JComboBox<String> getList = new JComboBox<String>(getFunctions);
 		
 		  
 		// Textfield
@@ -90,6 +87,8 @@ import javax.swing.*;
 		JButton cancelButton = new JButton("Close controlpanel");
 		
 		//Listners
+		
+		
 
 		okIdButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
@@ -106,7 +105,6 @@ import javax.swing.*;
 		
 		okSetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				setFunction = (String) setList.getSelectedItem();
 				setSliderValue = setSlider.getValue();
 				okSetPressed = true;
 			}
@@ -114,7 +112,6 @@ import javax.swing.*;
 		
 		okGetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				getFunction = (String) getList.getSelectedItem();
 				okGetPressed = true;
 			}
 		});

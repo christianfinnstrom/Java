@@ -47,9 +47,9 @@ public class TCPClient
    }
 	
 	//  mangler at server sender tilbake, så denne fungerer ikke ennå:
-	public int readFromDynamixelComputer(){
+	public String readFromDynamixelComputer(){
 		
-		int messageBack = 0;
+		String messageBack = null;
 		try {
 			messageBack = in.readInt();
 		} catch (IOException e) {

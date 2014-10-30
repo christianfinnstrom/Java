@@ -43,18 +43,9 @@ public class GreetingServer extends Thread
             		String messageFromClient = in.readUTF();
             		System.out.println(messageFromClient);
             		
-            		String[] separatedMessage = messageFromClient.split(",");
-            		if (separatedMessage.length == 2){
-            			int messageToClient = FunctionCaller.callGetFunction(messageFromClient);
-            			out.writeInt(messageToClient);
-                		out.flush();
-
-            		}else{
-            			FunctionCaller.callSetFunction(messageFromClient);
-            		}
-            		
-//            		out.writeUTF("Hello back- this message is from the server" );
-            		
+            		out.writeUTF("Hello back- this message is from the server" );
+            		out.flush();
+            		FunctionCaller.callSetFunction(messageFromClient);
             		
             	}catch(IOException e){
             		done = true;
