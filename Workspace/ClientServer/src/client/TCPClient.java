@@ -8,17 +8,24 @@ public class TCPClient
 	private Socket client;
 	private static DataOutputStream out;
 	private OutputStream outToServer;
+	InputStream inFromServer ;
+    private static DataInputStream in;
 	
 	public TCPClient(String ip, int port){
 		
 		try {
 			client = new Socket(ip, port);
+			//output
 			outToServer = client.getOutputStream();
 			out = new DataOutputStream(outToServer);
+			//input 
+			inFromServer = client.getInputStream();
+			in = new DataInputStream(inFromServer);
 			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -31,12 +38,39 @@ public class TCPClient
 	   
 		try {
 			out.writeUTF(message);
+			out.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	   
    }
+	
+	//  mangler at server sender tilbake, så denne fungerer ikke ennå:
+	public String readFromDynamixelComputer(){
+		
+		String messageBack = null;
+		try {
+			messageBack = in.readUTF();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return messageBack;
+	}
+ 
+ 
+ public static String createMessageString(int id, String functionName){
+	   
+	   return (Integer.toString(id) + "," + functionName);
+	   
+ }
+ 
+ public static String createMessageString(int id, String functionName,int value){
+	   
+	   return (Integer.toString(id) + "," + functionName + "," + Integer.toString(value));
+ }
+ 
 	
 	
 //   public void startClient()
@@ -98,28 +132,10 @@ public class TCPClient
     
 //   }
    
-   public static String createMessageString(int id, String functionName){
-	   
-	   return (Integer.toString(id) + "," + functionName);
-	   
-   }
-   
-   public static String createMessageString(int id, String functionName,int value){
-	   
-	   return (Integer.toString(id) + "," + functionName + "," + Integer.toString(value));
-   }
+
 
 
    
-   // mangler at server sender tilbake, så denne fungerer ikke enda:
-//   public static String readFromDynamixelComputer(String message, DataOutputStream out){
-//	   try {
-//		out.writeUTF(message);
-//	} catch (IOException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
-//	return message;
-//   }
+
 
 }

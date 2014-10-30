@@ -31,12 +31,20 @@ public class GreetingServer extends Thread
             
             // Receive message from client
             DataInputStream in = new DataInputStream(server.getInputStream());
+            
+            
+            //Send message
+            OutputStream outToServer = server.getOutputStream();
+            DataOutputStream out = new DataOutputStream(outToServer);
+            
             boolean done = false;
             while(!done){
             	try{
             		String messageFromClient = in.readUTF();
             		System.out.println(messageFromClient);
             		
+            		out.writeUTF("Hello back- this message is from the server" );
+            		out.flush();
             		FunctionCaller.callSetFunction(messageFromClient);
             		
             	}catch(IOException e){

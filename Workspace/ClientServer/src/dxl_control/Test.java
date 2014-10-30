@@ -23,11 +23,20 @@ public class Test {
 		TCPClient tcpClient = new TCPClient("127.0.0.1", 8888);
 		
 		
+		
+		// TODO Må kjøres når GUI-client skal kjøres
 		while(!motorControlPanel.cancelPressed){
+			
+			//TODO må legge inn knapper til "get" og kalle riktig "if" hvis den blir trykket på
 			if (motorControlPanel.okPressed){
+				
+				//TODO Dette må hente ut ID og functionName fra gui automatisk
 				String message = TCPClient.createMessageString(2, "setGoalPosition",
 						motorControlPanel.sliderValue);
 				tcpClient.sendToDynamixelComputer(message);
+				
+				//Skal skrive ut melding fra server
+				System.out.println(tcpClient.readFromDynamixelComputer());
 				
 				motorControlPanel.okPressed = false;
 			}

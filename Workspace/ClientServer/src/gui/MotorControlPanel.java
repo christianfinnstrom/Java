@@ -27,8 +27,8 @@ import javax.swing.*;
 		  private void prepareGUI() {
 			  
 			mainFrame = new JFrame("Motor control-table");
-			mainFrame.setSize(400,200);
-			mainFrame.setLayout(new GridLayout(2, 1));
+			mainFrame.setSize(400,600);
+			mainFrame.setLayout(new GridLayout(4, 1));
 			mainFrame.addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent windowEvent){
 //					System.exit(0);
@@ -45,16 +45,24 @@ import javax.swing.*;
 		  // Called from client
 		  public void showControlPanel() {
 			  
-				// Slider 
+				
+			  
+			  
+			  
+			  
+			  	// Slider 
 				final JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 1000, 200);
 				slider.setMinorTickSpacing(100);
 				slider.setMajorTickSpacing(200);
 				slider.setPaintTicks(true);
 				slider.setPaintLabels(true);
-			  
-			
-			  	JButton okButton = new JButton("OK");
+			  	
+				
+				
+				//Buttons
+				JButton okButton = new JButton("OK");
 				JButton cancelButton = new JButton("Close controlpanel");
+	
 				
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e){
