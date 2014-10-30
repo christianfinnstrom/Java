@@ -1,0 +1,105 @@
+package gui;
+
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.*;
+
+	public class MotorControlPanel {
+		
+		// Initialize variables
+		public int setSliderValue = 200;
+		public boolean okPressed = false;
+		public boolean cancelPressed = false;
+		private JFrame mainFrame;
+		
+		private JPanel idPanel;
+		private JPanel setPanel;
+		private JPanel getPanel;
+		
+	public MotorControlPanel() {
+		prepareGUI();
+	}
+
+		  
+		  // Set up GUI for the motor controlpanel
+	private void prepareGUI() {
+	 
+		mainFrame = new JFrame("Motor control-table");
+		mainFrame.setSize(400,600);
+		mainFrame.setLayout(new GridLayout(4, 1));
+		mainFrame.addWindowListener(new WindowAdapter() {
+		public void windowClosing(WindowEvent windowEvent){
+		//					System.exit(0);
+		}
+		});
+			
+		idPanel = new JPanel();
+		idPanel.setLayout(new FlowLayout());
+		
+		setPanel = new JPanel();
+		setPanel.setLayout(new FlowLayout());
+		
+		getPanel = new JPanel();
+		getPanel.setLayout(new FlowLayout());
+		
+	}
+
+		
+		  // Called from client
+	public void showControlPanel() {
+			  
+			  
+		//dropdown-list with set/get functions
+		String[] setFunctions = { "Set goal position", "Set baudrate" };
+		String[] getFunctions = { "Get goal position", "Get baudrate" };
+		
+		JComboBox setList = new JComboBox<String>(setFunctions);
+		  	
+		  
+		  
+		// Sliders
+		final JSlider setSlider = new JSlider(JSlider.HORIZONTAL, 0, 1000, 200);
+		setSlider.setMinorTickSpacing(100);
+		setSlider.setMajorTickSpacing(200);
+		setSlider.setPaintTicks(true);
+		setSlider.setPaintLabels(true);
+		
+		
+		
+		//Buttons
+		JButton okSetButton = new JButton("OK - set");
+		JButton cancelButton = new JButton("Close controlpanel");
+		
+		
+		okSetButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				setSliderValue = setSlider.getValue();
+				okPressed = true;
+			}
+		});
+		
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cancelPressed = true;
+				System.exit(0);
+			}
+		});
+		
+		setPanel.add(setSlider);
+		setPanel.add(okSetButton);
+		
+		mainFrame.add(setPanel);
+		mainFrame.add(cancelButton);
+		mainFrame.setVisible(true);
+		}
+	
+		
+	public int getValue(){
+		return this.setSliderValue;
+	}
+}

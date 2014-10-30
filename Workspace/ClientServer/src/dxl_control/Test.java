@@ -27,18 +27,24 @@ public class Test {
 		// TODO Må kjøres når GUI-client skal kjøres
 		while(!motorControlPanel.cancelPressed){
 			
+			// Hvis id-ok er trykket henter den ut id fra textfield. Errormelding hvis feil input
+			if(motorControlPanel.okIdPressed){
+				System.out.println(motorControlPanel.id);
+				motorControlPanel.okIdPressed = false;
+			}
+			
 			//TODO må legge inn knapper til "get" og kalle riktig "if" hvis den blir trykket på
-			if (motorControlPanel.okPressed){
+			if (motorControlPanel.okSetPressed){
 				
 				//TODO Dette må hente ut ID og functionName fra gui automatisk
 				String message = TCPClient.createMessageString(2, "setGoalPosition",
-						motorControlPanel.sliderValue);
+						motorControlPanel.setSliderValue);
 				tcpClient.sendToDynamixelComputer(message);
 				
-				//Skal skrive ut melding fra server
+				//Skal skrive ut melding fra server. Funker fint. Skal kun brukes når "get-knapp" trykkes.
 				System.out.println(tcpClient.readFromDynamixelComputer());
 				
-				motorControlPanel.okPressed = false;
+				motorControlPanel.okSetPressed = false;
 			}
 		}
 		
