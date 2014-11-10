@@ -47,12 +47,14 @@ public class Test {
 			//GET-pressed
 			if (motorControlPanel.okGetPressed){
 				
-				String message = TCPClient.createMessageString(motorControlPanel.id, "setGoalPosition");
+				
+				String message = TCPClient.createMessageString(motorControlPanel.id, motorControlPanel.getFunction);
 				tcpClient.sendToDynamixelComputer(message);
 				
-				//TODO bruk denne verdien og set den i riktig plass
-				System.out.println(tcpClient.readFromDynamixelComputer());
-				
+				//TODO bruk denne verdien og sett den i riktig plass
+
+				String getMessageReceived = motorControlPanel.getFunction + ": " + Integer.toString(tcpClient.readFromDynamixelComputer());
+				motorControlPanel.setTextField(getMessageReceived);
 				motorControlPanel.okGetPressed = false;
 			}
 		}

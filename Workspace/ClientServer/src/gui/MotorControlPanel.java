@@ -10,9 +10,13 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
+
+
 	public class MotorControlPanel {
 		
 		// Initialize variables
+		public JTextField getTextField;
+		
 		public int id = 0;
 		public int setSliderValue = 200;
 		public boolean okSetPressed = false;
@@ -29,12 +33,15 @@ import javax.swing.*;
 		private JPanel setPanel;
 		private JPanel getPanel;
 		
+		
+
+		
 	public MotorControlPanel() {
 		prepareGUI();
 	}
 
 		  
-		  // Set up GUI for the motor controlpanel
+	// Set up GUI for the motor controlpanel
 	private void prepareGUI() {
 	 
 		mainFrame = new JFrame("Motor control-table");
@@ -58,13 +65,72 @@ import javax.swing.*;
 	}
 
 		
-		  // Called from client
+	// Called from client
 	public void showControlPanel() {
 			  
 			  
 		//dropdown-list with set/get functions
-		String[] setFunctions = { "Set goal position", "Set baudrate" };
-		String[] getFunctions = { "Get goal position", "Get baudrate" };
+		String[] getFunctions = { "get Model Number", 
+				"get Model Number", 
+				"get Version Of Firmware", 
+				"get ID",
+				"get Baudrate", 
+				"get Return Delay Time", 
+				"get CW Angle Limit", 
+				"get CCW Angle Limit", 
+				"get The Highest Limit Temperature", 
+				"get The Lowest Limit Voltage", 
+				"get The Highest Limit Voltage", 
+				"get Max Torque", 
+				"get Status Return Level", 
+				"get Alarm LED", 
+				"get Alarm Shutdown", 
+				"get Torque Enable", 
+				"get LED", 
+				"get CW Compliance Margin", 
+				"get CCW Compliance Margin", 
+				"get CW Compliance Slope", 
+				"get CCW Compliance Slope", 
+				"get Goal Position", 
+				"get Moving Speed", 
+				"get Torque Limit", 
+				"get Present Position", 
+				"get Present Speed", 
+				"get Present Load", 
+				"get Present Voltage", 
+				"get Present Temperature",
+				"get Registered", 
+				"is Moving", 
+				"is EEPROM Locked", 
+				"get Punch", 
+				"get Goal Position Angular", 
+				"get Present Position Angular",
+				"get Movement Mode"};
+		
+		String[] setFunctions = { 		
+				//"setID",
+				"Set baudrate",
+				"set Return Delay Time",
+				"set CW Angle Limit",
+				"set CCW Angle Limit",
+				"set The Highest Limit Temperature",
+				"set The Lowest Limit Voltage",
+				"set The Highest Limit Voltage",
+				"set Max Torque",
+				"set Status Return Level",
+				"set Alarm LED",
+				"set Alarm Shutdown",
+				"set Torque Enable",
+				"set LED",
+				"set CW Compliance Margin",
+				"set CCW Compliance Margin",
+				"set CW Compliance Slope",
+				"set CCW Compliance Slope",
+				"set Goal Position",
+				"set Moving Speed",
+				"set Torque Limit",
+				"set Lock",
+				"set Punch"};
 		
 		final JComboBox<String> setList = new JComboBox<String>(setFunctions);
 		final JComboBox<String> getList = new JComboBox<String>(getFunctions);
@@ -72,10 +138,11 @@ import javax.swing.*;
 		  
 		// Textfield
 		final JTextField idTextField = new JTextField(5);
-		JTextField setTextField = new JTextField(10);
+		getTextField = new JTextField(20);
+		getTextField.setEditable(false);
 		  
 		// Sliders
-		final JSlider setSlider = new JSlider(JSlider.HORIZONTAL, 0, 1000, setSliderValue);
+		final JSlider setSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, setSliderValue);
 		setSlider.setMinorTickSpacing(100);
 		setSlider.setMajorTickSpacing(200);
 		setSlider.setPaintTicks(true);
@@ -116,6 +183,7 @@ import javax.swing.*;
 			public void actionPerformed(ActionEvent e){
 				getFunction = (String) getList.getSelectedItem();
 				okGetPressed = true;
+			
 			}
 		});
 		
@@ -135,6 +203,7 @@ import javax.swing.*;
 		
 		getPanel.add(getList);
 		getPanel.add(okGetButton);
+		getPanel.add(getTextField);
 		
 		mainFrame.add(idPanel);
 		mainFrame.add(setPanel);
@@ -144,7 +213,11 @@ import javax.swing.*;
 		}
 	
 		
-	public int getValue(){
+	public int getSliderValue(){
 		return this.setSliderValue;
+	}
+	
+	public void setTextField(String getMessageReceived){
+		getTextField.setText(getMessageReceived);
 	}
 }
