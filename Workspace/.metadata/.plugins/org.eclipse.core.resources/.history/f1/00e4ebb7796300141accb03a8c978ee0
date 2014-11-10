@@ -12,10 +12,6 @@ public class FunctionCaller {
 	 * @param ID
 	 * @param value
 	 */
-	
-	
-	// TODO toLowerCase()
-	
 	public static void callSetFunction(String message){
 		
 		String[] separatedMessage = stringSeparator(message);
@@ -71,7 +67,7 @@ public class FunctionCaller {
 		int id = Integer.parseInt(separatedMessage[0]);
 		String functionName = separatedMessage[1];
 		
-		if (functionName == "getModelNumber".toLowerCase()) return DynamixelControl.getModelNumber(id);
+		if (functionName == "getModelNumber") return DynamixelControl.getModelNumber(id);
 		if (functionName == "getModelNumber") return DynamixelControl.getModelNumber(id);
 		if (functionName == "getVersionOfFirmware") return DynamixelControl.getVersionOfFirmware(id);
 		if (functionName == "getID") return DynamixelControl.getID(id);

@@ -13,10 +13,14 @@
 <fullyQualifiedTypeName name="dxl_communication.DynamixelControl"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="org.omg.CORBA.portable.ValueOutputStream"/>
-<fullyQualifiedTypeName name="java.io.DataOutputStream"/>
 <fullyQualifiedTypeName name="server.GreetingServer"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="gui.MotorControlPanel"/>
 <fullyQualifiedTypeName name="client.TCPClient"/>
+<fullyQualifiedTypeName name="java.io.DataOutputStream"/>
+<fullyQualifiedTypeName name="java.awt.FlowLayout"/>
+<fullyQualifiedTypeName name="javax.swing.JComboBox"/>
+<fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
+<fullyQualifiedTypeName name="java.lang.NumberFormatException"/>
 <fullyQualifiedTypeName name="utility.FunctionCaller"/>
 </qualifiedTypeNameHistroy>
