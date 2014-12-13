@@ -1,0 +1,35 @@
+package temp;
+
+import gui.ServerControlPanel;
+import gui.WelcomeScreen;
+
+public class MainProgram {
+	
+	public String ipAndPort[];
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		WelcomeScreen welcomeScreen = new WelcomeScreen();
+		int mode = welcomeScreen.showWelcomeScreen();
+		
+		// Local mode
+		if (mode == 1){
+			
+		}
+		
+		// Client mode
+		
+		// Server mode
+		
+//		ClientTest clientTest = new ClientTest();
+//		clientTest.sh
+		
+//		ServerControlPanel serverControlPanel = new ServerControlPanel();
+//		serverControlPanel.showServerControlPanel();
+	}
+	
+	public void setIpAndPort(String s[]){
+		ipAndPort = s;
+	}
+
+}

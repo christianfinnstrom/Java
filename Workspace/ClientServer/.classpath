@@ -2,5 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Christian/Documents/GitHub/Java/Workspace/ClientServer/bin/libraries/jna-4.1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="src/libraries/DynamixelControl32_DLL.dll"/>
+	<classpathentry kind="lib" path="src/libraries/DynamixelControl32_SO.so"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

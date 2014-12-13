@@ -7,11 +7,8 @@
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="utility.UtilityClass"/>
 <fullyQualifiedTypeName name="dxl_communication.Communication"/>
 <fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction"/>
-<fullyQualifiedTypeName name="dxl_communication.DynamixelControl"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="org.omg.CORBA.portable.ValueOutputStream"/>
 <fullyQualifiedTypeName name="server.GreetingServer"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
@@ -21,6 +18,19 @@
 <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
 <fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
 <fullyQualifiedTypeName name="java.lang.NumberFormatException"/>
-<fullyQualifiedTypeName name="utility.FunctionCaller"/>
 <fullyQualifiedTypeName name="gui.MotorControlPanel"/>
+<fullyQualifiedTypeName name="java.rmi.activation.ActivationGroupDesc.CommandEnvironment"/>
+<fullyQualifiedTypeName name="javax.swing.plaf.SliderUI"/>
+<fullyQualifiedTypeName name="dxl_communication.DynamixelControl"/>
+<fullyQualifiedTypeName name="gui.WelcomeScreen"/>
+<fullyQualifiedTypeName name="java.awt.Dimension"/>
+<fullyQualifiedTypeName name="java.net.InetAddress"/>
+<fullyQualifiedTypeName name="java.net.UnknownHostException"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="temp.ClientTest"/>
+<fullyQualifiedTypeName name="javax.swing.JLabel"/>
+<fullyQualifiedTypeName name="temp.MainProgram"/>
+<fullyQualifiedTypeName name="utility.FunctionCaller"/>
+<fullyQualifiedTypeName name="utility.UtilityClass"/>
+<fullyQualifiedTypeName name="gui.ServerControlPanel"/>
 </qualifiedTypeNameHistroy>

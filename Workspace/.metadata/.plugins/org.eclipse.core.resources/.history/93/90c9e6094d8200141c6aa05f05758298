@@ -1,0 +1,20 @@
+package temp;
+
+import gui.ServerControlPanel;
+import gui.WelcomeScreen;
+
+public class MainProgram {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		WelcomeScreen welcomeScreen = new WelcomeScreen();
+		welcomeScreen.showWelcomeScreen();
+		
+//		ClientTest clientTest = new ClientTest();
+//		clientTest.sh
+		
+//		ServerControlPanel serverControlPanel = new ServerControlPanel();
+//		serverControlPanel.showServerControlPanel();
+	}
+
+}

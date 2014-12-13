@@ -1,0 +1,158 @@
+package gui;
+
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import temp.ClientTest;
+import utility.UtilityClass;
+import temp.MainProgram;
+
+public class WelcomeScreen {
+
+	
+	public String ipAddress;
+	public String portAddress;
+	
+	private JFrame mainWelcomeFrame;
+	
+	private JPanel localPanel;
+	private JPanel clientPanel;
+	private JPanel serverPanel;
+	
+	public WelcomeScreen(){
+		prepareGUI();
+	}
+
+	private void prepareGUI() {
+		
+		mainWelcomeFrame = new JFrame("Welcome");
+		mainWelcomeFrame.setSize(400,600);
+		mainWelcomeFrame.setLayout(new GridLayout(3, 1));
+		mainWelcomeFrame.addWindowListener(new WindowAdapter() {
+		public void windowClosing(WindowEvent windowEvent){
+			System.exit(0);
+		}
+		});
+		
+			
+		localPanel = new JPanel();
+		localPanel.setLayout(new FlowLayout());
+		
+		clientPanel = new JPanel();
+		clientPanel.setLayout(new FlowLayout());
+		
+		serverPanel = new JPanel();
+		serverPanel.setLayout(new FlowLayout());
+		
+	}
+	
+	// Called in MainProgram
+		public int showWelcomeScreen() {
+			
+			
+			int returnValue = 0;
+			
+		
+			// Text field
+			final JTextField ipTextField = new JTextField(5);
+			final JTextField portTextField = new JTextField(5);
+			
+			// Buttons
+			JButton localButton = new JButton("Local");
+			JButton clientButton = new JButton("Client");
+			JButton serverButton = new JButton("Server");
+			
+			// Label
+			JLabel portLabel = new JLabel("Port: ");
+			JLabel ipLabel = new JLabel("IP: ");
+			
+			
+			// Listeners
+			
+			// Local pressed
+			localButton.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent e){
+					// Launch Local
+					returnValue = 1;
+				}
+			});
+			
+			
+			// Client pressed
+			clientButton.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent e){
+					
+					ipAddress = ipTextField.getText();
+					
+					if(!(UtilityClass.isIPAddressValid(ipAddress))){
+						JOptionPane.showMessageDialog(null, "IP address is not valid.", "Bad input",  JOptionPane.ERROR_MESSAGE);
+						return;
+						
+					}else{
+						
+						try{
+							portAddress = portTextField.getText(); //Integer.parseInt(
+							// Launch Client with IP of host
+							//mainWelcomeFrame.dispose();
+							
+							String s[] = {ipAddress, portAddress};
+							
+							ClientTest.main(s); 
+							
+						}catch (NumberFormatException ex){
+							JOptionPane.showMessageDialog(null, "port-field must be integer between 1 and xxx", "Bad input",  JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+					}
+				}
+			});
+			
+			
+			// Server pressed
+			serverButton.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent e){
+					// Launch server
+				}
+			});
+			
+			
+			
+			
+			// Add content to panels
+			localPanel.add(localButton);
+			
+			clientPanel.add(ipLabel);
+			clientPanel.add(ipTextField);
+			clientPanel.add(portLabel);
+			clientPanel.add(portTextField);
+			clientPanel.add(clientButton);
+			
+			serverPanel.add(serverButton);
+			
+			mainWelcomeFrame.add(localPanel);
+			mainWelcomeFrame.add(clientPanel);
+			mainWelcomeFrame.add(serverPanel);
+			
+			mainWelcomeFrame.setVisible(true);
+			
+			
+			return 0;
+			
+		}
+				  
+	
+}

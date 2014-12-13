@@ -1,0 +1,142 @@
+package utility;
+
+
+import dxl_communication.DynamixelControl;
+
+public class FunctionCaller {
+
+	
+	/**
+	 * Set-functions
+	 * @param functionName
+	 * @param ID
+	 * @param value
+	 */
+	
+	
+	// TODO toLowerCase()
+	
+	public static void callSetFunction(String message){
+		
+		String[] separatedMessage = stringSeparator(message);
+		
+		if (separatedMessage.length != 3) return;
+		
+		int id = Integer.parseInt(separatedMessage[0]);
+		String functionName = separatedMessage[1];
+		int value = Integer.parseInt(separatedMessage[2]);
+
+		
+		
+		
+		//if (functionName == "setID") DynamixelControl.setID(id, value);
+		if (functionName == "set baudrate") DynamixelControl.setBaudrate(id, value);
+		if (functionName == "set Return Delay Time") DynamixelControl.setReturnDelayTime(id, value);
+		if (functionName == "set CW Angle Limit") DynamixelControl.setCWAngleLimit(id, value);
+		if (functionName == "set CCW Angle Limit") DynamixelControl.setCCWAngleLimit(id, value);
+		if (functionName == "set The Highest Limit Temperature") DynamixelControl.setTheHighestLimitTemperature(id, value);
+		if (functionName == "set The Lowest Limit Voltage") DynamixelControl.setTheLowestLimitVoltage(id, value);
+		if (functionName == "set The Highest Limit Voltage") DynamixelControl.setTheHighestLimitVoltage(id, value);
+		if (functionName == "set Max Torque") DynamixelControl.setMaxTorque(id, value);
+		if (functionName == "set Status Return Level") DynamixelControl.setStatusReturnLevel(id, value);
+		if (functionName == "set Alarm LED") DynamixelControl.setAlarmLED(id, value);
+		if (functionName == "set Alarm Shutdown") DynamixelControl.setAlarmShutdown(id, value);
+		if (functionName == "set Torque Enable") DynamixelControl.setTorqueEnable(id, value);
+		if (functionName == "set LED") DynamixelControl.setLED(id, value);
+		if (functionName == "set CW Compliance Margin") DynamixelControl.setCWComplianceMargin(id, value);
+		if (functionName == "set CCW Compliance Margin") DynamixelControl.setCCWComplianceMargin(id, value);
+		if (functionName == "set CW Compliance Slope") DynamixelControl.setCWComplianceSlope(id, value);
+		if (functionName == "set CCW Compliance Slope") DynamixelControl.setCCWComplianceSlope(id, value);
+		if (functionName == "set Goal Position") DynamixelControl.setGoalPosition(id, value);
+		if (functionName == "set Moving Speed") DynamixelControl.setMovingSpeed(id, value);
+		if (functionName == "set Torque Limit") DynamixelControl.setTorqueLimit(id, value);
+		if (functionName == "set Lock") DynamixelControl.setLock(id, value);
+		if (functionName == "set Punch") DynamixelControl.setPunch(id, value);
+
+		
+	}
+	
+	/**
+	 * Overload: Get-functions
+	 * @param functionName 
+	 * @param ID
+	 */
+	
+	//public static int callGetFunction(String functionName, int id, String message){
+	public static int callGetFunction(String message){	
+		String[] separatedMessage = stringSeparator(message);
+		
+		if (separatedMessage.length != 2) return -1;
+		
+		int id = Integer.parseInt(separatedMessage[0]);
+		
+		String functionName = separatedMessage[1];
+		System.out.println(functionName);
+		if (functionName == "get Model Number".toLowerCase()) return DynamixelControl.getModelNumber(id);
+		if (functionName == "get Model Number") return DynamixelControl.getModelNumber(id);
+		if (functionName == "get Version Of Firmware") return DynamixelControl.getVersionOfFirmware(id);
+		if (functionName == "get ID") return DynamixelControl.getID(id);
+		if (functionName == "get Baudrate") return DynamixelControl.getBaudrate(id);
+		if (functionName == "get Return Delay Time") return DynamixelControl.getReturnDelayTime(id);
+		if (functionName == "get CW Angle Limit") return DynamixelControl.getCWAngleLimit(id);
+		if (functionName == "get CCW Angle Limit") return DynamixelControl.getCCWAngleLimit(id);
+		if (functionName == "get The Highest Limit Temperature") return DynamixelControl.getTheHighestLimitTemperature(id);
+		if (functionName == "get The Lowest Limit Voltage") return DynamixelControl.getTheLowestLimitVoltage(id);
+		if (functionName == "get The Highest Limit Voltage") return DynamixelControl.getTheHighestLimitVoltage(id);
+		if (functionName == "get Max Torque") return DynamixelControl.getMaxTorque(id);
+		if (functionName == "get Status Return Level") return DynamixelControl.getStatusReturnLevel(id);
+		if (functionName == "get Alarm LED") return DynamixelControl.getAlarmLED(id);
+		if (functionName == "get Alarm Shutdown") return DynamixelControl.getAlarmShutdown(id);
+		if (functionName == "get Torque Enable") return DynamixelControl.getTorqueEnable(id);
+		if (functionName == "get LED") return DynamixelControl.getLED(id);
+		if (functionName == "get CW Compliance Margin") return DynamixelControl.getCWComplianceMargin(id);
+		if (functionName == "get CCW Compliance Margin") return DynamixelControl.getCCWComplianceMargin(id);
+		if (functionName == "get CW Compliance Slope") return DynamixelControl.getCWComplianceSlope(id);
+		if (functionName == "get CCW Compliance Slope") return DynamixelControl.getCCWComplianceSlope(id);
+		if (functionName == "get Goal Position") return DynamixelControl.getGoalPosition(id);
+		if (functionName == "get Moving Speed") return DynamixelControl.getMovingSpeed(id);
+		if (functionName == "get Torque Limit") return DynamixelControl.getTorqueLimit(id);
+		if (functionName == "get Present Position") return DynamixelControl.getPresentPosition(id);
+		if (functionName == "get Present Speed") return DynamixelControl.getPresentSpeed(id);
+		if (functionName == "get Present Load") return DynamixelControl.getPresentLoad(id);
+		if (functionName == "get Present Voltage") return DynamixelControl.getPresentVoltage(id);
+		if (functionName == "get Present Temperature") return DynamixelControl.getPresentTemperature(id);
+		if (functionName == "get Registered") return DynamixelControl.getRegistered(id);
+		if (functionName == "is Moving") return DynamixelControl.getMoving(id);
+		if (functionName == "is EEPROM Locked") return DynamixelControl.getLock(id);
+		if (functionName == "get Punch") return DynamixelControl.getPunch(id);
+		if (functionName == "get Goal Position Angular") return DynamixelControl.getGoalPositionAngular(id);
+		if (functionName == "get Present Position Angular") return DynamixelControl.getPresentPositionAngular(id);
+		if (functionName == "get Movement Mode") return DynamixelControl.getMovementMode(id);
+		else return 0;
+	}
+	
+	public static String[] stringSeparator(String message){
+
+		return message.split(",");	
+		
+	}
+	
+
+
+	
+	
+	
+	
+//	public static void main(String args[]){
+//		stringSeparator("getMoving,2,134");
+//		
+//	}
+	
+	
+	/**
+	 * TODO
+	 * motta string -> call function
+	 * 
+	 * call function -> string
+	 * 
+	 * 
+	 */
+		
+		
+}

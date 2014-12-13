@@ -1,0 +1,98 @@
+package gui;
+
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class ServerControlPanel {
+
+	private JFrame mainFrame;
+	
+	private JPanel getIPPanel;
+	private JPanel startServerPanel;
+	private JPanel feedbackPanel;
+	
+	public ServerControlPanel(){
+		prepareGUI();
+	}
+	
+	
+	private void prepareGUI() {
+		
+		mainFrame = new JFrame("Server Control Panel");
+		mainFrame.setSize(400,600);
+		mainFrame.setLayout(new GridLayout(3, 1));
+		mainFrame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent windowEvent){
+				System.exit(0);
+			}
+		});
+		
+		feedbackPanel = new JPanel();
+		feedbackPanel.setLayout(new FlowLayout());
+		
+		startServerPanel = new JPanel();
+		startServerPanel.setLayout(new FlowLayout());
+		
+		getIPPanel = new JPanel();
+		getIPPanel.setLayout(new FlowLayout());
+	}
+	
+	public void showServerControlPanel(){
+		
+		// Text field
+		final JTextField feedbackTextField = new JTextField(50);
+		feedbackTextField.setPreferredSize(new Dimension(200, 24));
+		feedbackTextField.setEditable(false);
+		final JTextField getIPTextField = new JTextField(5);
+		final JTextField startServerTextField = new JTextField(5);
+		
+		// Buttons
+		JButton getIPButton = new JButton("get my IP");
+		JButton startServerButton = new JButton("Start server");
+
+		
+		
+		// Listeners
+		
+		// Get IP button pressed
+		getIPButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e){
+				// Launch Local
+			}
+		});
+		
+		
+		// Start server button pressed
+		startServerButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e){
+				// Launch Local
+			}
+		});
+		
+		feedbackPanel.add(feedbackTextField);
+		getIPPanel.add(getIPButton);
+		getIPPanel.add(getIPTextField);
+		startServerPanel.add(startServerButton);
+		startServerPanel.add(startServerTextField);
+
+		
+		
+		mainFrame.add(feedbackPanel);
+		mainFrame.add(getIPPanel);
+		mainFrame.add(startServerPanel);
+		
+		mainFrame.setVisible(true);
+	}
+}

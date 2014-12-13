@@ -9,16 +9,18 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.*;
+import javax.swing.plaf.SliderUI;
 
 
 
-	public class MotorControlPanel {
+	public class MotorControlPanel extends Thread{
 		
 		// Initialize variables
 		public JTextField getTextField;
 		
 		public int id = 0;
-		public int setSliderValue = 200;
+		public int setValue = 20;
+		public int setTextfieldValue;
 		public boolean okSetPressed = false;
 		public boolean okGetPressed = false;
 		public boolean okIdPressed = false;
@@ -32,6 +34,7 @@ import javax.swing.*;
 		private JPanel idPanel;
 		private JPanel setPanel;
 		private JPanel getPanel;
+		private JPanel cancelPanel;
 		
 		
 
@@ -62,15 +65,18 @@ import javax.swing.*;
 		getPanel = new JPanel();
 		getPanel.setLayout(new FlowLayout());
 		
+		cancelPanel = new JPanel();
+		cancelPanel.setLayout(new FlowLayout());
+		
 	}
 
 		
 	// Called from client
-	public void showControlPanel() {
+	public void run(){//showControlPanel() {
 			  
 			  
-		//dropdown-list with set/get functions
-		String[] getFunctions = { "get Model Number", 
+		// Dropdown-list with set/get functions
+		String[] getFunctions = {  
 				"get Model Number", 
 				"get Version Of Firmware", 
 				"get ID",
@@ -109,7 +115,7 @@ import javax.swing.*;
 		
 		String[] setFunctions = { 		
 				//"setID",
-				"Set baudrate",
+				"set baudrate",
 				"set Return Delay Time",
 				"set CW Angle Limit",
 				"set CCW Angle Limit",
@@ -132,37 +138,40 @@ import javax.swing.*;
 				"set Lock",
 				"set Punch"};
 		
+		// Dropdown-lists
 		final JComboBox<String> setList = new JComboBox<String>(setFunctions);
 		final JComboBox<String> getList = new JComboBox<String>(getFunctions);
 		
 		  
-		// Textfield
+		// Textfields
 		final JTextField idTextField = new JTextField(5);
 		getTextField = new JTextField(20);
 		getTextField.setEditable(false);
-		  
+		final JTextField setTextField = new JTextField(5);
+		
 		// Sliders
-		final JSlider setSlider = new JSlider(JSlider.HORIZONTAL, 0, 1000, setSliderValue);
-		setSlider.setMinorTickSpacing(100);
-		setSlider.setMajorTickSpacing(200);
+		final JSlider setSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, setValue);
+		setSlider.setMinorTickSpacing(10);
+		setSlider.setMajorTickSpacing(20);
 		setSlider.setPaintTicks(true);
 		setSlider.setPaintLabels(true);
 		
 		
 		
-		//Buttons
+		// Buttons
 		JButton okIdButton = new JButton("OK - id");
 		JButton okSetButton = new JButton("OK - set");
 		JButton okGetButton = new JButton("OK - get");
 		JButton cancelButton = new JButton("Close controlpanel");
 		
-		//Listners
-
+		// Listners
+		
+		// ID pressed
 		okIdButton.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e){
 				try{
 					id = Integer.parseInt(idTextField.getText());
-					
 				}catch (NumberFormatException ex){
 					JOptionPane.showMessageDialog(null, "ID-field must be integer between 1 and xxx", "Bad input",  JOptionPane.ERROR_MESSAGE);
 					return;
@@ -171,14 +180,30 @@ import javax.swing.*;
 			}
 		});
 		
+		// Set pressed
 		okSetButton.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e){
-				setFunction = (String) setList.getSelectedItem();
-				setSliderValue = setSlider.getValue();
+				if (setTextField.getText().equals("")){
+					setFunction = (String) setList.getSelectedItem();
+					setValue = setSlider.getValue();
+				}else{
+					try{
+						setFunction = (String) setList.getSelectedItem();
+						setValue = Integer.parseInt(setTextField.getText());
+						// set slider to same value as text field input
+						setSlider.setValue(setValue);
+					}catch (NumberFormatException ex){
+						JOptionPane.showMessageDialog(null, "ID-field must be integer between 0 and xxx", "Bad input",  JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+				}
 				okSetPressed = true;
+				setTextField.setText("");
 			}
 		});
 		
+		// Get pressed
 		okGetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				getFunction = (String) getList.getSelectedItem();
@@ -187,6 +212,7 @@ import javax.swing.*;
 			}
 		});
 		
+		// Cancel pressed
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cancelPressed = true;
@@ -194,27 +220,32 @@ import javax.swing.*;
 			}
 		});
 		
+		// Add content to panels
 		idPanel.add(idTextField);
 		idPanel.add(okIdButton);
 		
 		setPanel.add(setList);
-		setPanel.add(setSlider);
 		setPanel.add(okSetButton);
+		setPanel.add(setSlider);
+		setPanel.add(setTextField);
 		
 		getPanel.add(getList);
 		getPanel.add(okGetButton);
 		getPanel.add(getTextField);
 		
+		cancelPanel.add(cancelButton);
+		
 		mainFrame.add(idPanel);
 		mainFrame.add(setPanel);
 		mainFrame.add(getPanel);
-		mainFrame.add(cancelButton);
+		mainFrame.add(cancelPanel);
+		
 		mainFrame.setVisible(true);
 		}
 	
 		
 	public int getSliderValue(){
-		return this.setSliderValue;
+		return this.setValue;
 	}
 	
 	public void setTextField(String getMessageReceived){

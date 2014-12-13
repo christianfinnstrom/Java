@@ -1,0 +1,126 @@
+package temp;
+
+import java.io.IOException;
+
+import utility.FunctionCaller;
+import control.ActuatorControl;
+import network_communication.TCPClient;
+import network_communication.TCPServer;
+import gui.MotorControlPanel;
+import gui.ServerControlPanel;
+import gui.WelcomeScreen;
+
+public class MainProgram {
+	
+	public static String ipAndPort[];
+
+	public static void main(String[] args) {
+		
+		int mode = 0;
+		// Start Welcome screen
+		WelcomeScreen welcomeScreen = new WelcomeScreen();
+		mode = welcomeScreen.showWelcomeScreen();
+		
+		// Local mode
+		if (mode == 1){
+			MotorControlPanel motorControlPanel = new MotorControlPanel();
+			motorControlPanel.run();
+			while(!motorControlPanel.cancelPressed){
+				
+				// OK-ID pressed
+				if(motorControlPanel.okIdPressed){
+					System.out.println(motorControlPanel.id);
+					motorControlPanel.okIdPressed = false;
+				}
+				
+				//SET-pressed
+				if (motorControlPanel.okSetPressed){
+					
+					String message = TCPClient.createMessageString(motorControlPanel.id, motorControlPanel.setFunction,
+							motorControlPanel.setValue);
+					System.out.println(message);
+					FunctionCaller.callSetFunction(message);
+					motorControlPanel.okSetPressed = false;
+				}
+				
+				//GET-pressed
+				if (motorControlPanel.okGetPressed){
+					
+					String message = TCPClient.createMessageString(motorControlPanel.id, motorControlPanel.getFunction);
+					System.out.println(message);
+					int getMessage = FunctionCaller.callGetFunction(message);
+					String getMessageReceived = motorControlPanel.getFunction + ": " + Integer.toString(getMessage);
+					motorControlPanel.setTextField(getMessageReceived);
+					motorControlPanel.okGetPressed = false;
+				}
+			}
+			
+		}
+		
+		// Client mode
+		if (mode == 2){
+			
+			MotorControlPanel motorControlPanel = new MotorControlPanel();
+			motorControlPanel.run();
+			
+			//TCPClient tcpClient = new TCPClient("127.0.0.1.", 8888);
+			int port = Integer.parseInt(ipAndPort[1]);
+			TCPClient tcpClient = new TCPClient(ipAndPort[0], port);
+			
+			while(!motorControlPanel.cancelPressed){
+				
+				// OK-ID pressed
+				if(motorControlPanel.okIdPressed){
+					System.out.println(motorControlPanel.id);
+					motorControlPanel.okIdPressed = false;
+				}
+				
+				//SET-pressed
+				if (motorControlPanel.okSetPressed){
+					
+					String message = TCPClient.createMessageString(motorControlPanel.id, motorControlPanel.setFunction,
+							motorControlPanel.setValue);
+					tcpClient.sendToDynamixelComputer(message);
+					
+					motorControlPanel.okSetPressed = false;
+				}
+				
+				//GET-pressed
+				if (motorControlPanel.okGetPressed){
+					
+					String message = TCPClient.createMessageString(motorControlPanel.id, motorControlPanel.getFunction);
+					tcpClient.sendToDynamixelComputer(message);
+
+					String getMessageReceived = motorControlPanel.getFunction + ": " + Integer.toString(tcpClient.readFromDynamixelComputer());
+					motorControlPanel.setTextField(getMessageReceived);
+					motorControlPanel.okGetPressed = false;
+				}
+			}
+		}
+	
+		
+		// Server mode
+		if (mode == 3){
+			
+			ServerControlPanel serverControlPanel = new ServerControlPanel();
+			serverControlPanel.showServerControlPanel();
+			
+			ActuatorControl.initialize();
+			
+			int port = 8888;//Integer.parseInt(args[0]);
+			
+			  try
+			  {
+			     Thread t = new TCPServer(port);
+			     t.start();
+			     
+			     
+			  }catch(IOException e)
+			  {
+			     e.printStackTrace();
+			  }
+		}
+		
+	}
+	
+}

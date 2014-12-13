@@ -1,0 +1,142 @@
+package utility;
+
+
+import control.ActuatorControl;
+
+public class FunctionCaller {
+
+	
+	/**
+	 * Set-functions
+	 * @param functionName
+	 * @param ID
+	 * @param value
+	 */
+	
+	
+	// TODO toLowerCase()
+	
+	public static void callSetFunction(String message){
+		
+		String[] separatedMessage = stringSeparator(message);
+		
+		if (separatedMessage.length != 3) return;
+		
+		int id = Integer.parseInt(separatedMessage[0]);
+		String functionName = separatedMessage[1];
+		int value = Integer.parseInt(separatedMessage[2]);
+
+		System.out.println("id" + id);
+		System.out.println("value" + value);
+		
+		
+		//if (functionName == "setID") DynamixelControl.setID(id, value);
+		if (functionName.equals("set baudrate")) ActuatorControl.setBaudrate(id, value);
+		if (functionName.equals("set Return Delay Time")) ActuatorControl.setReturnDelayTime(id, value);
+		if (functionName.equals("set CW Angle Limit")) ActuatorControl.setCWAngleLimit(id, value);
+		if (functionName.equals("set CCW Angle Limit")) ActuatorControl.setCCWAngleLimit(id, value);
+		if (functionName.equals("set The Highest Limit Temperature")) ActuatorControl.setTheHighestLimitTemperature(id, value);
+		if (functionName.equals("set The Lowest Limit Voltage")) ActuatorControl.setTheLowestLimitVoltage(id, value);
+		if (functionName.equals("set The Highest Limit Voltage")) ActuatorControl.setTheHighestLimitVoltage(id, value);
+		if (functionName.equals("set Max Torque")) ActuatorControl.setMaxTorque(id, value);
+		if (functionName.equals("set Status Return Level")) ActuatorControl.setStatusReturnLevel(id, value);
+		if (functionName.equals("set Alarm LED")) ActuatorControl.setAlarmLED(id, value);
+		if (functionName.equals("set Alarm Shutdown")) ActuatorControl.setAlarmShutdown(id, value);
+		if (functionName.equals("set Torque Enable")) ActuatorControl.setTorqueEnable(id, value);
+		if (functionName.equals("set LED")) ActuatorControl.setLED(id, value);
+		if (functionName.equals("set CW Compliance Margin")) ActuatorControl.setCWComplianceMargin(id, value);
+		if (functionName.equals("set CCW Compliance Margin")) ActuatorControl.setCCWComplianceMargin(id, value);
+		if (functionName.equals("set CW Compliance Slope")) ActuatorControl.setCWComplianceSlope(id, value);
+		if (functionName.equals("set CCW Compliance Slope")) ActuatorControl.setCCWComplianceSlope(id, value);
+		if (functionName.equals("set Goal Position")) ActuatorControl.setGoalPosition(id, value);
+		if (functionName.equals("set Moving Speed")) ActuatorControl.setMovingSpeed(id, value);
+		if (functionName.equals("set Torque Limit")) ActuatorControl.setTorqueLimit(id, value);
+		if (functionName.equals("set Lock")) ActuatorControl.setLock(id, value);
+		if (functionName.equals("set Punch")) ActuatorControl.setPunch(id, value);
+
+		
+	}
+	
+	/**
+	 * Overload: Get-functions
+	 * @param functionName 
+	 * @param ID
+	 */
+	
+	//public static int callGetFunction(String functionName, int id, String message){
+	public static int callGetFunction(String message){	
+		String[] separatedMessage = stringSeparator(message);
+		
+		
+		if (separatedMessage.length != 2) return -1;
+		
+		int id = Integer.parseInt(separatedMessage[0]);
+		String functionName = separatedMessage[1];
+		System.out.println(id);
+		if (functionName.equals("get Model Number")) return ActuatorControl.getModelNumber(id);
+		if (functionName.equals("get Version Of Firmware")) return ActuatorControl.getVersionOfFirmware(id);
+		if (functionName.equals("get ID")) return ActuatorControl.getID(id);
+		if (functionName.equals("get Baudrate")) return ActuatorControl.getBaudrate(id);
+		if (functionName.equals("get Return Delay Time")) return ActuatorControl.getReturnDelayTime(id);
+		if (functionName.equals("get CW Angle Limit")) return ActuatorControl.getCWAngleLimit(id);
+		if (functionName.equals("get CCW Angle Limit")) return ActuatorControl.getCCWAngleLimit(id);
+		if (functionName.equals("get The Highest Limit Temperature")) return ActuatorControl.getTheHighestLimitTemperature(id);
+		if (functionName.equals("get The Lowest Limit Voltage")) return ActuatorControl.getTheLowestLimitVoltage(id);
+		if (functionName.equals("get The Highest Limit Voltage")) return ActuatorControl.getTheHighestLimitVoltage(id);
+		if (functionName.equals("get Max Torque")) return ActuatorControl.getMaxTorque(id);
+		if (functionName.equals("get Status Return Level")) return ActuatorControl.getStatusReturnLevel(id);
+		if (functionName.equals("get Alarm LED")) return ActuatorControl.getAlarmLED(id);
+		if (functionName.equals("get Alarm Shutdown")) return ActuatorControl.getAlarmShutdown(id);
+		if (functionName.equals("get Torque Enable")) return ActuatorControl.getTorqueEnable(id);
+		if (functionName.equals("get LED")) return ActuatorControl.getLED(id);
+		if (functionName.equals("get CW Compliance Margin")) return ActuatorControl.getCWComplianceMargin(id);
+		if (functionName.equals("get CCW Compliance Margin")) return ActuatorControl.getCCWComplianceMargin(id);
+		if (functionName.equals("get CW Compliance Slope")) return ActuatorControl.getCWComplianceSlope(id);
+		if (functionName.equals("get CCW Compliance Slope")) return ActuatorControl.getCCWComplianceSlope(id);
+		if (functionName.equals("get Goal Position")) return ActuatorControl.getGoalPosition(id);
+		if (functionName.equals("get Moving Speed")) return ActuatorControl.getMovingSpeed(id);
+		if (functionName.equals("get Torque Limit")) return ActuatorControl.getTorqueLimit(id);
+		if (functionName.equals("get Present Position")) return ActuatorControl.getPresentPosition(id);
+		if (functionName.equals("get Present Speed")) return ActuatorControl.getPresentSpeed(id);
+		if (functionName.equals("get Present Load")) return ActuatorControl.getPresentLoad(id);
+		if (functionName.equals("get Present Voltage")) return ActuatorControl.getPresentVoltage(id);
+		if (functionName.equals("get Present Temperature")) return ActuatorControl.getPresentTemperature(id);
+		if (functionName.equals("get Registered")) return ActuatorControl.getRegistered(id);
+		if (functionName.equals("is Moving")) return ActuatorControl.getMoving(id);
+		if (functionName.equals("is EEPROM Locked")) return ActuatorControl.getLock(id);
+		if (functionName.equals("get Punch")) return ActuatorControl.getPunch(id);
+		if (functionName.equals("get Goal Position Angular")) return ActuatorControl.getGoalPositionAngular(id);
+		if (functionName.equals("get Present Position Angular")) return ActuatorControl.getPresentPositionAngular(id);
+		if (functionName.equals("get Movement Mode")) return ActuatorControl.getMovementMode(id);
+		else return 0;
+	}
+	
+	public static String[] stringSeparator(String message){
+
+		return message.split(",");	
+		
+	}
+	
+
+
+	
+	
+	
+	
+//	public static void main(String args[]){
+//		stringSeparator("getMoving,2,134");
+//		
+//	}
+	
+	
+	/**
+	 * TODO
+	 * motta string -> call function
+	 * 
+	 * call function -> string
+	 * 
+	 * 
+	 */
+		
+		
+}

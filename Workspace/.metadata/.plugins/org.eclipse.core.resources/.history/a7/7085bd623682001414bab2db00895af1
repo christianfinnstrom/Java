@@ -1,0 +1,101 @@
+package dxl_control;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+
+import com.sun.jna.Platform;
+
+
+public class UtilityClass {
+
+	/**
+	 * 
+	 * @return A String with the DLL filename based on OS and bitness
+	 */
+	public static String getDLLFileName(){
+		if (Platform.isWindows()){
+			if (Platform.is64Bit()) return "DynamixelControl64_DLL";
+			else return "DynamixelControl32_DLL";
+		}
+		else if(Platform.isLinux()){
+			if (Platform.is64Bit()) return "DynamixelControl64_SO";
+			else return "DynamixelControl32_SO";
+		}
+		else return null;
+	}
+
+	/**
+	 * 
+	 * @return OS name
+	 */
+	public static String getOS(){
+		return System.getProperty("os.name");
+	}
+	
+	/**
+	 * 
+	 * @return the bitness of the OS
+	 */
+	public static int getBitness(){
+		return Integer.parseInt(System.getProperty("sun.arch.data.model"));
+	}
+	
+	
+	/**
+	 *
+	 * @return The IP address of this host
+	 */
+	public static String getIPAddress(){
+		String ip;
+		boolean set = false;
+		
+		try {
+			ip = InetAddress.getLocalHost().toString();
+			set = true;
+		} catch (UnknownHostException e) {
+			ip = "Could not get IP address";
+		}
+		
+		if(set){
+			if (ip.contains("/")) ip = ip.split("/")[1];
+			
+			//Check that the IP address is valid
+			if(!isIPAddressValid(ip)) ip = "IP address is incorrect: " + ip;
+		}
+		return ip;
+	}
+	
+	
+	/**
+	 * Checks whether an IP address is correct or not
+	 * @param ip ip address to check
+	 * @return 	True or false
+	 */
+	public static boolean isIPAddressValid(String ip){
+		
+		//Check that all characters are valid:
+		for(int i = 0; i < ip.length(); i++){
+			if(Character.isLetter(ip.charAt(i)) && ip.charAt(i) != '.') return false;
+		}
+		if(!ip.contains(".")) return false;
+		else{
+			
+			//  Find all the dot-indexes
+			ArrayList<Integer> dotIndexes = new ArrayList<Integer>();
+			for(int i = 0; i < ip.length(); i++){
+				if(ip.charAt(i) == '.') dotIndexes.add(i);
+			}
+			if (dotIndexes.size() != 3) return false; // maximum three dots
+			//Check that all values are in the range [0, 255]
+			if(Integer.valueOf(ip.substring(0, dotIndexes.get(0))) > 255 || 
+					Integer.valueOf(ip.substring(0, dotIndexes.get(0))) < 0) return false;
+			if(Integer.valueOf(ip.substring(dotIndexes.get(0) + 1, dotIndexes.get(1))) > 255 || 
+					Integer.valueOf(ip.substring(dotIndexes.get(0) + 1, dotIndexes.get(1)))< 0) return false;
+			if(Integer.valueOf(ip.substring(dotIndexes.get(1) + 1, dotIndexes.get(2))) > 255 || 
+					Integer.valueOf(ip.substring(dotIndexes.get(1) + 1, dotIndexes.get(2))) < 0) return false;
+		}
+		
+		return true;
+	}
+
+}
